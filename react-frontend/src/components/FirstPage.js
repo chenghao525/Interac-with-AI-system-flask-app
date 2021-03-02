@@ -1,20 +1,121 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { Table, Button, Popconfirm, message } from "antd";
-// import { httpPost } from "../config/request";
-// import { API } from "../config/api";
-// import AddPersonformModal from "./AddPersonFormModal";
-// require("../customCSS/myStyle.css");
+import "../CSS/firstPage.css";
+import { Image, Dropdown, Menu, Button } from "antd";
+import img from "../images/1.jpg";
+import { DownOutlined } from "@ant-design/icons";
+
+
+
+
+
+const menu = (
+  <Menu>
+    <Menu.Item>
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://www.antgroup.com"
+      >
+        1st menu item
+      </a>
+    </Menu.Item>
+    <Menu.Item>
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://www.antgroup.com"
+      >
+        2nd menu item
+      </a>
+    </Menu.Item>
+    <Menu.Item>
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://www.antgroup.com"
+      >
+        3rd menu item
+      </a>
+    </Menu.Item>
+    <Menu.Item>
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://www.antgroup.com"
+      >
+        4th menu item
+      </a>
+    </Menu.Item>
+  
+  </Menu>
+);
 
 const FirstPage = () => {
-//   const dispatch = useDispatch();
+  //   const dispatch = useDispatch();
   const [visible, setVisible] = useState(true);
+  const [dropdownValue, setDropdownValue] = useState(["value1, value2"]); 
+
+  const dropdownValues = () =>{
+    console.log("Good shit")
+    return (
+    <div>
+    {dropdownValue.map(value =>(
+      <Menu.Item>
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {value}
+      </a>
+    </Menu.Item>
+    ))}
+    </div>
+  )};
 
   useEffect(() => {
     console.log("Example use effect");
   }, []);
 
-  return <div>This is the first page</div>;
+  return (
+    <div className="page-container">
+      <div className="title">Bird classification with AI assistance</div>
+      <div className="row">
+        <div className="column left-panel">
+          <div style={{ textAlign: "left" }}>
+            Select one attribute that describes the bird you see on the right
+            from the list below
+          </div>
+          <div className="input-container">
+            <div className="attribute-container">
+              attribute:
+              <Dropdown overlay={dropdownValues()}>
+                <Button className="attribute-dropdown">
+                  Click to see attributes <DownOutlined />
+                </Button>
+              </Dropdown>
+            </div>
+            <div className="value-container">
+              Value:
+              <Dropdown overlay={menu}>
+                <Button className="value-dropdown">
+                  Click to see values <DownOutlined />
+                </Button>
+              </Dropdown>
+            </div>
+          </div>
+          <div className="btn-container">
+            <Button className="round-btn" type="primary">Add</Button>
+            <Button className="round-btn" type="primary" danger>Delete</Button>
+            <Button className="round-btn">Restart</Button>
+          </div>
+        </div>
+        <div className="column right-panel">
+          <Image width={500} height={300} src={img} preview={false}></Image>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default FirstPage;
