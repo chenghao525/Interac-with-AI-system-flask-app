@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../CSS/firstPage.css";
-import { Image, Dropdown, Menu, Button } from "antd";
+import { Image, Dropdown, Menu, Button, Select } from "antd";
 import img from "../images/1.jpg";
 import { DownOutlined } from "@ant-design/icons";
 
-
-
-
+const { Option } = Select;
 
 const menu = (
   <Menu>
@@ -47,31 +45,26 @@ const menu = (
         4th menu item
       </a>
     </Menu.Item>
-  
   </Menu>
 );
 
 const FirstPage = () => {
   //   const dispatch = useDispatch();
   const [visible, setVisible] = useState(true);
-  const [dropdownValue, setDropdownValue] = useState(["value1, value2"]); 
+  const [dropdownValue, setDropdownValue] = useState(["value1", "value2"]);
 
-  const dropdownValues = () =>{
-    console.log("Good shit")
+  const dropdownValues = () => {
+    console.log("Good shit");
     return (
-    <div>
-    {dropdownValue.map(value =>(
-      <Menu.Item>
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {value}
-      </a>
-    </Menu.Item>
-    ))}
-    </div>
-  )};
+      <>
+        {dropdownValue.map((value) => (
+          <Option>{value}</Option>
+        ))}
+      </>
+    );
+  };
+
+  const handleAttriSelect = () => {};
 
   useEffect(() => {
     console.log("Example use effect");
@@ -89,11 +82,13 @@ const FirstPage = () => {
           <div className="input-container">
             <div className="attribute-container">
               attribute:
-              <Dropdown overlay={dropdownValues()}>
-                <Button className="attribute-dropdown">
-                  Click to see attributes <DownOutlined />
-                </Button>
-              </Dropdown>
+              <Select
+                defaultValue="lucy"
+                style={{ width: 200 }}
+                onChange={handleAttriSelect}
+              >
+                {dropdownValues()}
+              </Select>
             </div>
             <div className="value-container">
               Value:
@@ -105,8 +100,12 @@ const FirstPage = () => {
             </div>
           </div>
           <div className="btn-container">
-            <Button className="round-btn" type="primary">Add</Button>
-            <Button className="round-btn" type="primary" danger>Delete</Button>
+            <Button className="round-btn" type="primary">
+              Add
+            </Button>
+            <Button className="round-btn" type="primary" danger>
+              Delete
+            </Button>
             <Button className="round-btn">Restart</Button>
           </div>
         </div>
