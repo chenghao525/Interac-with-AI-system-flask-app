@@ -52,3 +52,9 @@
 .round-btn{
     border-radius: 8px !important;
 }
+
+.next-btn{
+    margin-top: 20px;
+    float: right;
+    width: 20%
+}
