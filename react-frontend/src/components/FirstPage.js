@@ -5,6 +5,7 @@ import { Image, Dropdown, Menu, Button, Select } from "antd";
 import img from "../images/1.jpg";
 import { DownOutlined } from "@ant-design/icons";
 import { attributesValue, imageList } from "../data/data.js";
+import Attribute from './Attribute.js';
 const fs = require("fs");
 
 const { Option } = Select;
@@ -17,6 +18,7 @@ const FirstPage = () => {
   const [selectedAttribute, setSelectedAttribute] = useState("");
   const [selectedValue, setSelectedValue] = useState("");
   const [imgIndex, setImgIndex] = useState(0);
+  const [desContentHTML, setDesContentHTML] = useState(0);
 
   const getAttributeOptions = () => {
     console.log("Good shit");
@@ -57,7 +59,9 @@ const FirstPage = () => {
     setImgIndex(imgIndex + 1);
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+
+  }, []);
 
   return (
     <div className="page-container">
@@ -70,9 +74,9 @@ const FirstPage = () => {
           </div>
           <div className="input-container">
             <div className="attribute-container">
-              attribute:
+              <span className="input-description">Attribute:</span>
               <Select
-                defaultValue="lucy"
+                defaultValue=""
                 style={{ width: 200 }}
                 onChange={handleAttriSelect}
               >
@@ -80,9 +84,9 @@ const FirstPage = () => {
               </Select>
             </div>
             <div className="value-container">
-              Value:
+              <span className="input-description">Value:</span>
               <Select
-                defaultValue="lucy"
+                defaultValue=""
                 style={{ width: 200 }}
                 onChange={handleValueSelect}
               >
@@ -99,13 +103,21 @@ const FirstPage = () => {
             </Button>
             <Button className="round-btn">Restart</Button>
           </div>
+          <div className="description-box">
+            <div id="first-line">Your current description is:</div>
+            <div className="description-context">
+                <Attribute name="Somename" value="SomeValue" />
+            </div>
+          </div>
         </div>
         <div className="column right-panel">
-          <img
-            width={500}
-            height={300}
-            src={baseImgUrl + imageList[imgIndex]}
-          ></img>
+          <div className="img-frame-container">
+            <div className="img-frame">
+              <img
+                src={baseImgUrl + imageList[imgIndex]}
+              ></img>
+            </div>
+          </div>
           <div>
             <Button
               className="round-btn next-btn"
