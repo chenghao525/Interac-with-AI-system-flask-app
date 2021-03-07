@@ -5,17 +5,10 @@ import "../CSS/firstPage.css";
 
 
 const Attribute = (props) => {
-    const [attribute, setAttribute] = useState(0);
-    const [value, setValue] = useState(0);
-
-    useEffect(()=>{
-        setAttribute(props.name);
-        setValue(props.value);
-    },[]);
 
     return (
         <div >
-            {attribute} : {value}
+            {props.name} : {props.value}
         </div>
     )
 

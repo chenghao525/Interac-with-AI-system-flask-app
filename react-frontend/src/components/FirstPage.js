@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../CSS/firstPage.css";
-import { Image, Dropdown, Menu, Button, Select } from "antd";
-import img from "../images/1.jpg";
-import { DownOutlined } from "@ant-design/icons";
+import { Button, Select } from "antd";
 import { attributesValue, imageList } from "../data/data.js";
-import Attribute from './Attribute.js';
+import Attribute from "./Attribute.js";
 const fs = require("fs");
 
 const { Option } = Select;
@@ -19,9 +17,11 @@ const FirstPage = () => {
   const [selectedValue, setSelectedValue] = useState("");
   const [imgIndex, setImgIndex] = useState(0);
   const [desContentHTML, setDesContentHTML] = useState(0);
+  const [attriValDict, setAttriValDict] = useState({});
+  const [lastAddedAttr, setLastAddedAttr] = useState("");
+
 
   const getAttributeOptions = () => {
-    console.log("Good shit");
     return (
       <>
         {Object.keys(attributesValue).map((value, idx) => (
@@ -34,7 +34,6 @@ const FirstPage = () => {
   };
 
   const getValueOptions = () => {
-    console.log("Good shit");
     return (
       <>
         {valueList.map((value, idx) => (
@@ -48,6 +47,7 @@ const FirstPage = () => {
 
   const handleAttriSelect = (value) => {
     setSelectedAttribute(value);
+    setSelectedValue("");
     setValueList(attributesValue[value]);
   };
   const handleValueSelect = (value) => {
@@ -59,9 +59,33 @@ const FirstPage = () => {
     setImgIndex(imgIndex + 1);
   };
 
-  useEffect(() => {
+  const handleAddBtn = () => {
+    console.log("Handle add button");
+    if (selectedAttribute && selectedValue) {
+      setLastAddedAttr(selectedAttribute)
+      setAttriValDict((prevState) => ({
+        ...prevState,
+        [selectedAttribute]: selectedValue,
+      }));
+    }
+  };
 
-  }, []);
+  const handleDeleteBtn = () =>{
+    const { [lastAddedAttr]: tmp, ...rest } = attriValDict;
+    setAttriValDict(rest);
+  }
+
+  const renderDescriptionPair = () => {
+    return (
+      <>
+        {Object.keys(attriValDict).map((key) => (
+          <Attribute name={key} value={attriValDict[key]} key={key[0]}/>
+        ))}
+      </>
+    );
+  };
+
+  useEffect(() => {}, []);
 
   return (
     <div className="page-container">
@@ -89,33 +113,30 @@ const FirstPage = () => {
                 defaultValue=""
                 style={{ width: 200 }}
                 onChange={handleValueSelect}
+                value={selectedValue}
               >
                 {getValueOptions()}
               </Select>
             </div>
           </div>
           <div className="btn-container">
-            <Button className="round-btn" type="primary">
+            <Button className="round-btn" type="primary" onClick={handleAddBtn}>
               Add
             </Button>
-            <Button className="round-btn" type="primary" danger>
+            <Button className="round-btn" type="primary" onClick={handleDeleteBtn} danger>
               Delete
             </Button>
             <Button className="round-btn">Restart</Button>
           </div>
           <div className="description-box">
             <div id="first-line">Your current description is:</div>
-            <div className="description-context">
-                <Attribute name="Somename" value="SomeValue" />
-            </div>
+            <div className="description-context">{renderDescriptionPair()}</div>
           </div>
         </div>
         <div className="column right-panel">
           <div className="img-frame-container">
             <div className="img-frame">
-              <img
-                src={baseImgUrl + imageList[imgIndex]}
-              ></img>
+              <img src={baseImgUrl + imageList[imgIndex]}></img>
             </div>
           </div>
           <div>
