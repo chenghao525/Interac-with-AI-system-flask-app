@@ -1,5 +1,39 @@
+import { Api } from '../../config/api';
+
 function parseJSON(response) {
     return response.json()
+}
+
+/**
+ * Start Request
+ *
+ * @param {*url,*method,*data} options
+ */
+export function startReq(data) {
+    const options = {};
+    options.url = `${Api}/start/`;
+    options.method = 'POST';
+    options.mode = 'cors';
+    options.body = JSON.stringify(data);
+    options.headers = {
+        'Content-Type': 'application/json;charset=UTF-8'
+    }
+    return fetch(options.url, options, { credentials: 'include' })
+        .then(parseJSON)
+        .then((res) => {
+            if (res.code === 200) {
+                // returned items
+                localStorage.setItem('user-id', res.body.user_id)
+                window.location.assign("/#/mainpage");
+
+                return res;
+            }
+            else {
+                console.log('error', res);
+                return res;
+            }
+        })
+        .catch(err => ({ err }))
 }
 
 /**
