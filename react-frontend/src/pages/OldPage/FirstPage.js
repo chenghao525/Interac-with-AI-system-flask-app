@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../CSS/firstPage.css";
 import { Button, Select } from "antd";
-import { attributesValue, imageList } from "../data/data.js";
+import { attributesValue, imageList } from "../../data/data.js";
 import Attribute from "./Attribute.js";
 const fs = require("fs");
 
