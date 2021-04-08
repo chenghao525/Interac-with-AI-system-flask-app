@@ -1,12 +1,16 @@
-import logo from './logo.svg';
 import './App.css';
-import MainPage from "./pages/MainPage/MainPage";
+
+import Route from './components/route/route';
+
+import { HashRouter as Router } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <MainPage />
-    </div>
+      <Router>
+          <div className="App">
+              <Route />
+          </div>
+      </Router>
   );
 }
 
