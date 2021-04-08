@@ -1,4 +1,4 @@
-import { Api } from '../../config/api';
+import { Api } from '../config/api';
 
 function parseJSON(response) {
     return response.json()
@@ -24,8 +24,6 @@ export function startReq(data) {
             if (res.code === 200) {
                 // returned items
                 localStorage.setItem('user-id', res.body.user_id)
-                window.location.assign("/#/mainpage");
-
                 return res;
             }
             else {
