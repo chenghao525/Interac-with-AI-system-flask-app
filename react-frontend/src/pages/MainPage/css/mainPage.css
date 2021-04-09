@@ -46,9 +46,18 @@
     text-align:center;
 }
 
+.ant-input.text-box{
+    display: inline-block !important;
+    width: 80px !important;
+    height: 40px !important;
+    font-size: 22px !important;
+    margin-top: 5px !important;
+    border: 3px solid #4472C4!important;
+}
+
 .text-box{
     display: inline-block;
-    width: 70px;
+    width: 80px;
     height: 40px;
     font-size: 22px;
     margin-top: 5px;
