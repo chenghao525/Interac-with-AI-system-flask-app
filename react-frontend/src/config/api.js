@@ -2,14 +2,13 @@ let Api = '';
 
 switch (process.env.NODE_ENV) {
     case 'development':
-        Api = 'http://localhost:8000';  // Localhost
-        // Api = 'http://10.249.46.56:8000';  // Miao Zhang
+        Api = 'http://127.0.0.1:5000/';  // Localhost
         break;
     case 'production':
-        Api = 'https://api.hopon.rocks';
+        Api = 'http://127.0.0.1:5000/';
         break;
     default:
-        Api = 'http://localhost:8000';
+        Api = 'http://127.0.0.1:5000/';
 }
 
 export { Api };

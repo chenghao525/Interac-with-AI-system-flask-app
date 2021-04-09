@@ -11,9 +11,9 @@ function parseJSON(response) {
  */
 export function startReq(data) {
     const options = {};
-    options.url = `${Api}/start/`;
+    options.url = `${Api}start/`;
     options.method = 'POST';
-    options.mode = 'cors';
+    options.mode = 'no-cors';
     options.body = JSON.stringify(data);
     options.headers = {
         'Content-Type': 'application/json;charset=UTF-8'
