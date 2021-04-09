@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button, Select, Statistic } from "antd";
 import "./css/mainPage.css";
 import { attributesValue, imageList } from "../../data/data.js";
-import PopupModal from "./components/PopupModal"
+import PopupModal from "./components/PopupModal";
 const fs = require("fs");
 
 const baseImgUrl = "./images/";
@@ -13,21 +13,34 @@ const MainPage = () => {
   const [valueList, setValueList] = useState([]);
   const [imgIndex, setImgIndex] = useState(0);
   const [openModal, setOpenModal] = useState(false);
+  const [deadline, setDeadline] = useState(0);
+  const [deleteImg, setDeleteImg] = useState(false);
+
+  const deadlineValue = Date.now() + 1000 * 2;
 
   const { Countdown } = Statistic;
-  const deadline = Date.now() + 1000 * 2;
 
   const handleNextClicked = () => {
     //TODO: set all value to zero
     setImgIndex(imgIndex + 1);
   };
 
-  const handleCountdownFinished = () =>{
+  const handleCountdownFinished = () => {
+    setDeleteImg(true);
     setOpenModal(true);
     console.log("Finished!");
-  }
+  };
 
-  useEffect(() => {}, []);
+  const modalTimesUp = () => {
+    setDeleteImg(false);
+    setOpenModal(false);
+    setImgIndex(imgIndex + 1);
+    setDeadline(Date.now() + 1000 * 2);
+  };
+
+  useEffect(() => {
+    setDeadline(deadlineValue);
+  }, []);
 
   return (
     <div className="page-container">
@@ -36,14 +49,24 @@ const MainPage = () => {
         <div className="column left-panel">
           <div className="img-frame-container">
             <div className="img-frame">
-              <img src={baseImgUrl + imageList[imgIndex]}></img>
+              {deleteImg ? (
+                <img src={baseImgUrl + "blank.jpg"}></img>
+              ) : (
+                <img src={baseImgUrl + imageList[imgIndex]}></img>
+              )}
             </div>
           </div>
         </div>
         <div className="column right-panel">
           <div className="countdown-container">
-            <Countdown title="Countdown" value={deadline} onFinish={handleCountdownFinished} format="mm:ss"/>
+            <Countdown
+              title="Countdown"
+              value={deadline}
+              onFinish={handleCountdownFinished}
+              format="mm:ss"
+            />
           </div>
+
           {/* <div>
             <Button
               className="round-btn next-btn"
@@ -55,7 +78,10 @@ const MainPage = () => {
           </div> */}
         </div>
       </div>
-      <PopupModal openModal={openModal}></PopupModal>
+      <PopupModal
+        openModal={openModal}
+        modalTimesUp={modalTimesUp}
+      ></PopupModal>
     </div>
   );
 };
