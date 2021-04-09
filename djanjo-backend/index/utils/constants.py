@@ -1,0 +1,6 @@
+class API_CODE:
+    OK = 200
+    REDIRECT = 300
+    FAILURE = 400
+    ERROR = 500
+    NOPRIVILEGES = 403
