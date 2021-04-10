@@ -12,7 +12,7 @@ const StarterPage = () => {
     const start = () => {
         if(consent === true){
             console.log("Start Study")
-            startReq({ userApproval: 1}).then(window.location.assign("/#/mainpage"))
+            startReq({ consent: 1}).then(window.location.assign("/#/mainpage"))
         }
         else{
             message.warning('Need to give consent to participate in the study.');

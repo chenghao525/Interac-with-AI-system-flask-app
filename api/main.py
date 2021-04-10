@@ -1,39 +1,32 @@
-from flask import Flask, jsonify, make_response
+from flask import Flask, request, Response, jsonify
 
 import sqlite3 as sql
 
-import json
+import os
 
 app = Flask(__name__)
 
 
-@app.route('/start', methods=['POST'])
-def starter(request):
-    if request.method == 'POST':
-        try:
-            body_decoded = json.loads(request.body)
-            consent = body_decoded['consent']
+@app.route('/start/', methods=['POST'])
+def start():
+    body_decoded = request.get_json()
+    consent = body_decoded['consent']
 
-            with sql.connect("database.db") as con:
-                cur = con.cursor()
-                cur.execute('INSERT INTO Consent (consent) VALUES(?)', consent)
+    con = sql.connect(os.path.join(os.getcwd(), 'api/database.db'))
+    cur = con.cursor()
+    cur.execute('INSERT INTO Consent (consent) VALUES(?)', [consent])
 
-                con.commit()
-                msg = "Record successfully added"
-                print(msg)
+    con.commit()
+    msg = "Record successfully added"
+    print(msg)
 
-        except:
-            con.rollback()
-            msg = "error in insert operation"
-            print(msg)
+    user_id = cur.execute("SELECT last_insert_rowid()").fetchone()[0]
 
-        finally:
-            user_id = "SELECT last_insert_rowid()"
-            response_body = {"user_id": user_id}
+    response_body = {'user_id': user_id}
+    print("user_id=" + str(user_id))
+    con.close()
 
-            con.close()
-
-            return make_response(jsonify(response_body), 200)
+    return jsonify(response_body)
 
 
 if __name__ == "__main__":

@@ -1,7 +1,7 @@
 import { Api } from '../config/api';
 
 function parseJSON(response) {
-    return response.json()
+    return response
 }
 
 /**
@@ -13,7 +13,7 @@ export function startReq(data) {
     const options = {};
     options.url = `${Api}start/`;
     options.method = 'POST';
-    options.mode = 'no-cors';
+    options.mode = 'cors';
     options.body = JSON.stringify(data);
     options.headers = {
         'Content-Type': 'application/json;charset=UTF-8'
@@ -21,8 +21,9 @@ export function startReq(data) {
     return fetch(options.url, options, { credentials: 'include' })
         .then(parseJSON)
         .then((res) => {
-            if (res.code === 200) {
+            if (res.status === 200) {
                 // returned items
+                console.log('success', res);
                 localStorage.setItem('user-id', res.body.user_id)
                 return res;
             }
