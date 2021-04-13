@@ -12,6 +12,7 @@ const MainPage = () => {
   //   const dispatch = useDispatch();
   const [valueList, setValueList] = useState([]);
   const [imgIndex, setImgIndex] = useState(0);
+  const [imgName, setImgName] = useState(imageList[0]);
   const [openModal, setOpenModal] = useState(false);
   const [deadline, setDeadline] = useState(0);
   const [deleteImg, setDeleteImg] = useState(false);
@@ -34,6 +35,7 @@ const MainPage = () => {
   const modalTimesUp = () => {
     setDeleteImg(false);
     setOpenModal(false);
+    setImgName(imageList[imgIndex + 1]);
     setImgIndex(imgIndex + 1);
     setDeadline(Date.now() + 1000 * 2);
   };

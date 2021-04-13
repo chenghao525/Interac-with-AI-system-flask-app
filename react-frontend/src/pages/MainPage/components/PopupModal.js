@@ -28,7 +28,7 @@ const PopupModal = (props) => {
   }
 
   useEffect(() => {
-    setDeadline(Date.now() + 1000 * 2);
+    setDeadline(Date.now() + 1000 * 10);
   }, [firstConfirm]);
 
   return (
@@ -87,7 +87,7 @@ const PopupModal = (props) => {
                 <Col span={12}>
                   <div className="modal-col">
                     <div className="estimate-text">Update your estimate:</div>
-                    <Input className="text-box" value={firstEstimation} onChange={(e)=>{setUpdatedEstimation(e.target.value)}}/>
+                    <Input className="text-box" placeholder={firstEstimation} onChange={(e)=>{setUpdatedEstimation(e.target.value)}}/>
                   </div>
                 </Col>
                 <Col span={12}>
