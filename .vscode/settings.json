@@ -1,4 +1,4 @@
 {
-    "python.pythonPath": "venv/bin/python3",
+    "python.pythonPath": "/Users/chenghaosun/Documents/local_github/interact-with-AI-system-flask-app/venv/bin/python",
     "git.ignoreLimitWarning": true
 }

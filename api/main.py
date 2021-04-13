@@ -29,5 +29,16 @@ def start():
     return jsonify(response_body)
 
 
+@app.route('/userData/', methods=['POST'])
+def userData():
+    body_decoded = request.get_json()
+    userInputTime = body_decoded['userInputTime']
+    
+    print("userInputTime",userInputTime)
+
+    # print("user input time: ",userInputTime)
+    return "1"
+
+
 if __name__ == "__main__":
     app.run(debug=True)

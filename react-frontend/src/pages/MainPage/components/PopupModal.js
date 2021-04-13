@@ -1,5 +1,8 @@
 import { Modal, Button, Row, Col, Statistic, Input } from "antd";
 import React, { useEffect, useState } from "react";
+import { Api } from '../../../config/api';
+
+import { request } from "../../../utils/request";
 
 const PopupModal = (props) => {
   const { Countdown } = Statistic;
@@ -7,25 +10,40 @@ const PopupModal = (props) => {
   const [firstEstimation, setFirstEstimation] = useState(0);
   const [updatedEstimation, setUpdatedEstimation] = useState(0);
   const [firstConfirm, setFirstConfim] = useState(false);
+  const [nowTime, setNowTime] = useState(Date.now());
+  const [userInputTime, setUserInputTime] = useState(Date.now());
 
   const handleCountdownFinished = () => {
-    // setOpenModal(true);
-    if(updatedEstimation === 0) setUpdatedEstimation(firstEstimation);
-    console.log("Finished!", updatedEstimation);
+    if (updatedEstimation === 0) setUpdatedEstimation(firstEstimation);
+    storeData();
     clearModal();
     props.modalTimesUp();
   };
 
-  const clearModal = () =>{
+  const storeData = () => {
+    let data = {userInputTime: userInputTime};
+    request({ url: `${Api}userData/`, method:"POST",data: data }).then(
+      res => {
+        console.log(res);
+      }
+    );
+  };
+
+  const clearModal = () => {
     setFirstEstimation(0);
     setUpdatedEstimation(0);
     setFirstConfim(false);
-  }
+  };
 
-  const handleConfirm = () =>{
+  const handleConfirm = () => {
     setFirstConfim(true);
-    console.log(firstEstimation);
-  }
+    setNowTime(Date.now());
+  };
+
+  const handleUpdateInput = (e) => {
+    setUpdatedEstimation(e.target.value);
+    setUserInputTime(((Date.now() - nowTime) / 1000).toFixed(2));
+  };
 
   useEffect(() => {
     setDeadline(Date.now() + 1000 * 10);
@@ -37,8 +55,6 @@ const PopupModal = (props) => {
       centered
       visible={props.openModal}
       footer={null}
-      //   onOk={() => this.setModal2Visible(false)}
-      //   onCancel={() => this.setModal2Visible(false)}
     >
       <div className="pop-container">
         <div>
@@ -47,16 +63,29 @@ const PopupModal = (props) => {
         </div>
         {!firstConfirm ? (
           <div>
-          <Row gutter={16}>
+            <Row gutter={16}>
               <Col span={12}>
                 <div className="modal-col">
                   <div className="estimate-text">Your estimate:</div>
-                  <Input className="text-box" placeholder="0" onChange={(e)=>{setFirstEstimation(e.target.value)}}/>
+                  <Input
+                    className="text-box"
+                    placeholder="0"
+                    onChange={(e) => {
+                      setFirstEstimation(e.target.value);
+                    }}
+                  />
                 </div>
               </Col>
               <Col span={12}>
                 <div className="modal-col">
-                  <Button type="primary" size="large" style={{marginTop:"42px"}} onClick={handleConfirm}>Confirm</Button>
+                  <Button
+                    type="primary"
+                    size="large"
+                    style={{ marginTop: "42px" }}
+                    onClick={handleConfirm}
+                  >
+                    Confirm
+                  </Button>
                 </div>
               </Col>
             </Row>
@@ -87,7 +116,11 @@ const PopupModal = (props) => {
                 <Col span={12}>
                   <div className="modal-col">
                     <div className="estimate-text">Update your estimate:</div>
-                    <Input className="text-box" placeholder={firstEstimation} onChange={(e)=>{setUpdatedEstimation(e.target.value)}}/>
+                    <Input
+                      className="text-box"
+                      placeholder={firstEstimation}
+                      onChange={handleUpdateInput}
+                    />
                   </div>
                 </Col>
                 <Col span={12}>
