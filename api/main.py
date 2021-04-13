@@ -1,13 +1,16 @@
 from flask import Flask, request, Response, jsonify
+from flask_cors import CORS, cross_origin
 
 import sqlite3 as sql
 
 import os
 
-app = Flask(__name__)
 
+app = Flask(__name__)
+CORS(app)
 
 @app.route('/start/', methods=['POST'])
+@cross_origin()
 def start():
     body_decoded = request.get_json()
     consent = body_decoded['consent']
@@ -30,6 +33,7 @@ def start():
 
 
 @app.route('/userData/', methods=['POST'])
+@cross_origin()
 def userData():
     body_decoded = request.get_json()
     userInputTime = body_decoded['userInputTime']
