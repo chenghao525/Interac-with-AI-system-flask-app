@@ -32,7 +32,7 @@ const PopupModal = (props) => {
       init_guess: firstEstimation,
       final_guess: passInUpdated
     };
-    request({ url: `${Api}answer`, method:"POST", data: data }).then(
+    request({ url: `${Api}answer/allow-cors`, method:"POST", data: data }).then(
       res => {
         console.log(res);
       }

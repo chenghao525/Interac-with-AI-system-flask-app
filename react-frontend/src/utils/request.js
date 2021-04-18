@@ -47,7 +47,8 @@ export function request(options = {}) {
         'user-ID': user_id,
         'Content-Type': 'application/json;charset=UTF-8',
     }
-    return fetch(url, options, { credentials: 'include' })
+    
+    return fetch(url, options, { mode: 'cors', credentials: 'include'})
         .then(parseJSON)
         .then((res) => {
             if (res.code === 200) {
