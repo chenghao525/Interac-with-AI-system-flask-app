@@ -18,8 +18,8 @@ const MainPage = () => {
   const [openModal, setOpenModal] = useState(false);
   const [deadline, setDeadline] = useState(0);
   const [deleteImg, setDeleteImg] = useState(false);
-  const [firstCountDown, setFirstCountDown] = useState(Date.now() + 1000 * 5);
-  const [modalCountDown, setModalCountDown] = useState(Date.now() + 1000 * 5);
+  const [firstCountDown, setFirstCountDown] = useState(Date.now() + 1000 * 1000);
+  const [modalCountDown, setModalCountDown] = useState(Date.now() + 1000 * 1000);
 
   const deadlineValue = Date.now() + 1000 * 2;
   const { Countdown } = Statistic;

@@ -63,7 +63,7 @@ def start():
     # return jsonify(response_body)
 
 
-@app.route('/userInfo/', methods=['GET'])
+@app.route('/userInfo', methods=['GET'])
 @cross_origin()
 def getUserData():
     user_id = request.args.get('userID')
