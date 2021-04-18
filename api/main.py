@@ -124,20 +124,5 @@ def getImageInfo():
     return response_body
 
 
-@app.route('/userData', methods=['POST'])
-@cross_origin()
-def userData():
-    body_decoded = request.get_json()
-    userInputTime = body_decoded['userInputTime']
-    firstEstimation = body_decoded['firstEstimation']
-    updatedEstimation = body_decoded['updatedEstimation']
-    
-    print("userInputTime: ",userInputTime)
-    print("firstEstimation: ",firstEstimation)
-    print("updatedEstimation: ",updatedEstimation)
-
-    return "1"
-
-
 if __name__ == "__main__":
     app.run(debug=True)
