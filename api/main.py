@@ -10,7 +10,7 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/start/', methods=['POST'])
+@app.route('/start', methods=['POST'])
 @cross_origin()
 def start():
     body_decoded = request.get_json()
