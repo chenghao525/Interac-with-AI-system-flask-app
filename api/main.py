@@ -37,8 +37,12 @@ def start():
 def userData():
     body_decoded = request.get_json()
     userInputTime = body_decoded['userInputTime']
+    firstEstimation = body_decoded['firstEstimation']
+    updatedEstimation = body_decoded['updatedEstimation']
     
-    print("userInputTime",userInputTime)
+    print("userInputTime: ",userInputTime)
+    print("firstEstimation: ",firstEstimation)
+    print("updatedEstimation: ",updatedEstimation)
 
     # print("user input time: ",userInputTime)
     return "1"

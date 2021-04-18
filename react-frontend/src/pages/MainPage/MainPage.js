@@ -4,6 +4,8 @@ import { Button, Select, Statistic } from "antd";
 import "./css/mainPage.css";
 import { attributesValue, imageList } from "../../data/data.js";
 import PopupModal from "./components/PopupModal";
+import { Api } from '../../config/api';
+import { request } from "../../utils/request";
 const fs = require("fs");
 
 const baseImgUrl = "./images/";
@@ -21,11 +23,6 @@ const MainPage = () => {
 
   const { Countdown } = Statistic;
 
-  const handleNextClicked = () => {
-    //TODO: set all value to zero
-    setImgIndex(imgIndex + 1);
-  };
-
   const handleCountdownFinished = () => {
     setDeleteImg(true);
     setOpenModal(true);
@@ -33,12 +30,24 @@ const MainPage = () => {
   };
 
   const modalTimesUp = () => {
+    if(imgIndex >= imageList.length - 1){
+      window.location.assign("/#/questionnaire");
+    }
+
     setDeleteImg(false);
     setOpenModal(false);
     setImgName(imageList[imgIndex + 1]);
     setImgIndex(imgIndex + 1);
     setDeadline(Date.now() + 1000 * 2);
   };
+
+  // const getData = () => {
+  //   request({ url: `${Api}getData/`, method:"GET"}).then(
+  //     res => {
+  //       console.log(res.data);
+  //     }
+  //   );
+  // };
 
   useEffect(() => {
     setDeadline(deadlineValue);
@@ -68,16 +77,6 @@ const MainPage = () => {
               format="mm:ss"
             />
           </div>
-
-          {/* <div>
-            <Button
-              className="round-btn next-btn"
-              type="primary"
-              onClick={handleNextClicked}
-            >
-              Next
-            </Button>
-          </div> */}
         </div>
       </div>
       <PopupModal

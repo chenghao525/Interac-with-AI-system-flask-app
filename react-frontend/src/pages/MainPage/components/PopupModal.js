@@ -1,7 +1,6 @@
 import { Modal, Button, Row, Col, Statistic, Input } from "antd";
 import React, { useEffect, useState } from "react";
 import { Api } from '../../../config/api';
-
 import { request } from "../../../utils/request";
 
 const PopupModal = (props) => {
@@ -14,14 +13,22 @@ const PopupModal = (props) => {
   const [userInputTime, setUserInputTime] = useState(Date.now());
 
   const handleCountdownFinished = () => {
-    if (updatedEstimation === 0) setUpdatedEstimation(firstEstimation);
-    storeData();
+    if (updatedEstimation === 0) {
+      setUpdatedEstimation(firstEstimation);
+      storeData(firstEstimation);
+    }else{
+      storeData(updatedEstimation);
+    }
     clearModal();
     props.modalTimesUp();
   };
 
-  const storeData = () => {
-    let data = {userInputTime: userInputTime};
+  const storeData = (passInUpdated) => {
+    let data = {
+      userInputTime: userInputTime,
+      firstEstimation: firstEstimation,
+      updatedEstimation: passInUpdated
+    };
     request({ url: `${Api}userData/`, method:"POST",data: data }).then(
       res => {
         console.log(res);
@@ -46,7 +53,7 @@ const PopupModal = (props) => {
   };
 
   useEffect(() => {
-    setDeadline(Date.now() + 1000 * 10);
+    setDeadline(Date.now() + 1000 * 2);
   }, [firstConfirm]);
 
   return (
