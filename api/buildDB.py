@@ -8,11 +8,11 @@ cur = conn.cursor()
 # User - User Table
 # User ID == Row Number
 # 1. consent: Integer (1 for consent)
-# 2. q_order: Integer (0 or 1) - question order: easy first(0), hard first(1)
-# 3. timing: Integer (0 or 1) - timing constraint: short(0) or long(1)
+# 2. q_order: String (0 or 1) - question order: E7 E3 E2 ... E4 H7 H1 H4 ... H6
+# 3. timing: Integer (0 or 1) - timing constraint for changing answer: short(0) or long(1)
 conn.execute('CREATE TABLE User ('
              'consent INTEGER NOT NULL, '
-             'q_order INTEGER NOT NULL, '
+             'q_order TEXT NOT NULL, '
              'timing INTEGER NOT NULL)')
 
 # Guess - Guess Table
@@ -24,6 +24,7 @@ conn.execute('CREATE TABLE User ('
 conn.execute('CREATE TABLE Guess ('
              'user_id INTEGER NOT NULL, '
              'q_id TEXT NOT NULL, '
+             'img_path TEXT NOT NULL, '
              'init_guess INTEGER, '
              'final_guess INTEGER, '
              'resp_time INTEGER)')
@@ -41,14 +42,14 @@ conn.execute('CREATE TABLE Image ('
 
 # Test Add Value
 consent = -1
-q_order = -2
+q_order = 'E7 E3 E2 E4 H7 H1 H4 H6'
 timing = -3
 cur.execute('INSERT INTO User (consent, q_order, timing) VALUES(?, ?, ?)', [consent, q_order, timing])
 cur.execute('DELETE FROM User WHERE consent=?', [consent])
 conn.commit()
 
 user_id = 1
-q_id = '2A'
+q_id = 'H2'
 init_guess = 23
 final_guess = 33
 resp_time = 4
@@ -56,7 +57,7 @@ cur.execute('INSERT INTO Guess (user_id, q_id, init_guess, final_guess, resp_tim
 cur.execute('DELETE FROM Guess WHERE user_id=?', [user_id])
 conn.commit()
 
-q_id = '2A'
+q_id = 'E1'
 img_path = '/images/'
 truth = 30
 ai = 28
