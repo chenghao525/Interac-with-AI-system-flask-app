@@ -44,15 +44,10 @@ const MainPage = () => {
   };
 
   const getUserData = () => {
-<<<<<<< HEAD
     let url = `${Api}userInfo?userID=` + localStorage.getItem("user-id");
     request({ url: url, method:"GET"})
     .then(response => response.json())
     .then(
-=======
-    let url = `${Api}userInfo/?userID=` + localStorage.getItem("user-id");
-    request({ url: url, method:"GET"}).then(
->>>>>>> 6a66d0f207c06ada7d161a40e276213c99c9ee33
       res => {
         let imageString = res['q_order']
         formatImageList(imageString);
