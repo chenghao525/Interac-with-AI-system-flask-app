@@ -108,6 +108,22 @@ def inputAnswer():
     return response_body
 
 
+@app.route('/imageInfo/', methods=['GET'])
+@cross_origin()
+def getImageInfo():
+    q_id = request.args.get('q_id')
+
+    con = sql.connect(os.path.join(os.getcwd(), 'api/database.db'))
+    cur = con.cursor()
+
+    truth = cur.execute('SELECT truth FROM Image WHERE q_id =(?) ;', [q_id]).fetchone()[0]
+    ai = round(random.sample(range(10,21), 1) * truth / 100) + truth
+    con.close()
+
+    response_body = {'q_id': q_id, 'ai': ai}
+    return response_body
+
+
 @app.route('/userData/', methods=['POST'])
 @cross_origin()
 def userData():
