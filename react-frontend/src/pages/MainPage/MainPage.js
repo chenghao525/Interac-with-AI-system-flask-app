@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Select, Statistic } from "antd";
 import "./css/mainPage.css";
-import { attributesValue, imageList } from "../../data/data.js";
+import { attributesValue } from "../../data/data.js";
 import PopupModal from "./components/PopupModal";
 import { Api } from '../../config/api';
 import { request } from "../../utils/request";
@@ -14,7 +14,8 @@ const MainPage = () => {
   //   const dispatch = useDispatch();
   const [valueList, setValueList] = useState([]);
   const [imgIndex, setImgIndex] = useState(0);
-  const [imgName, setImgName] = useState(imageList[0]);
+  const [imgName, setImgName] = useState("");
+  const [imageList, setImageList] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [deadline, setDeadline] = useState(0);
   const [deleteImg, setDeleteImg] = useState(false);
@@ -38,22 +39,46 @@ const MainPage = () => {
     setOpenModal(false);
     setImgName(imageList[imgIndex + 1]);
     setImgIndex(imgIndex + 1);
-    setDeadline(Date.now() + 1000 * 2);
+    
+    // setDeadline(Date.now() + 1000 * 2);
   };
 
   const getUserData = () => {
-    let url = `${Api}userInfo/?userID=` + localStorage.getItem("user-id");
-    request({ url: url, method:"GET"}).then(
+    let url = `${Api}userInfo?userID=` + localStorage.getItem("user-id");
+    request({ url: url, method:"GET"})
+    .then(response => response.json())
+    .then(
       res => {
-        console.log(res);
+        let imageString = res['q_order']
+        formatImageList(imageString);
+        setModalCountDown(res['timing']);
+        if(imageString[0] === "E"){setFirstCountDown(Date.now() + 1000*5);}
+        else {setFirstCountDown(Date.now() + 1000*10);}
       }
     );
   };
 
+  const formatImageList = (imageString) =>{
+    let strList = imageString.split(" ");
+    let imgList = [];
+
+    for(let str of strList){
+      str += ".jpg";
+      imgList.push(str);
+    }
+    setImageList(imgList);
+  }
+
   useEffect(() => {
     getUserData();
-    // setDeadline(deadlineValue);
   }, []);
+
+  useEffect(()=>{
+    if(imgName[0] === "E")
+      setFirstCountDown(Date.now() + 1000*5);
+    else if(imgName[0] === "H")
+    setFirstCountDown(Date.now() + 1000*10);
+  },[imgName])
 
   return (
     <div className="page-container">
@@ -74,7 +99,7 @@ const MainPage = () => {
           <div className="countdown-container">
             <Countdown
               title="Countdown"
-              value={deadline}
+              value={firstCountDown}
               onFinish={handleCountdownFinished}
               format="mm:ss"
             />
@@ -85,6 +110,7 @@ const MainPage = () => {
         openModal={openModal}
         modalTimesUp={modalTimesUp}
         modalCountDown={modalCountDown}
+        imgName={imgName}
       ></PopupModal>
     </div>
   );

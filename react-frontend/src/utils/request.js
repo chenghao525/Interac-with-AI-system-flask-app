@@ -45,7 +45,7 @@ export function request(options = {}) {
     }
     options.headers = {
         'user-ID': user_id,
-        'Content-Type': 'application/json;charset=UTF-8'
+        'Content-Type': 'application/json;charset=UTF-8',
     }
     return fetch(url, options, { credentials: 'include' })
         .then(parseJSON)
