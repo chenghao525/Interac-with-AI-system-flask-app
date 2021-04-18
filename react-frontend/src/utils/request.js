@@ -19,18 +19,12 @@ export function startReq(data) {
         'Content-Type': 'application/json;charset=UTF-8'
     }
     return fetch(options.url, options, { credentials: 'include' })
-        .then(parseJSON)
+        .then(response => response.json())
         .then((res) => {
-            if (res.status === 200) {
-                // returned items
-                console.log('success', res);
-                localStorage.setItem('user-id', res.body.user_id)
-                return res;
-            }
-            else {
-                console.log('error', res);
-                return res;
-            }
+            // returned items
+            console.log('success', res);
+            localStorage.setItem('user-id', res['user_id']);
+            return res;
         })
         .catch(err => ({ err }))
 }

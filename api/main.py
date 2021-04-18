@@ -1,8 +1,7 @@
-from flask import Flask, request, Response, jsonify
+from flask import Flask, request, Response, jsonify, json
 from flask_cors import CORS, cross_origin
 
 import sqlite3 as sql
-
 
 import random
 import os
@@ -54,10 +53,14 @@ def start():
     user_id = cur.execute("SELECT last_insert_rowid()").fetchone()[0]
 
     response_body = {'user_id': user_id}
-    print("user_id=" + str(user_id))
-    con.close()
 
-    return jsonify(response_body)
+    return response_body
+
+    #
+    # print("user_id=" + str(user_id))
+    # con.close()
+
+    # return jsonify(response_body)
 
 
 @app.route('/userInfo/', methods=['GET'])
@@ -73,7 +76,37 @@ def getUserData():
     con.close()
 
     response_body = {'user_id': user_id, 'q_order': q_order, "timing": timing}
-    return jsonify(response_body)
+    return response_body
+
+
+@app.route('/Answer', methods=['POST'])
+@cross_origin()
+def inputAnswer():
+    body_decoded = request.get_json()
+
+    user_id = body_decoded['user_id']
+    q_id = body_decoded['q_id']
+    init_guess = body_decoded['init_guess']
+    final_guess = body_decoded['final_guess']
+    resp_time = body_decoded['resp_time']
+
+    con = sql.connect(os.path.join(os.getcwd(), 'api/database.db'))
+    cur = con.cursor()
+
+    cur.execute('INSERT INTO Guess (user_id, q_id, init_guess, final_guess, resp_time) VALUES(?, ?, ?, ?, ?)',
+                [user_id, q_id, init_guess, final_guess, resp_time])
+    con.close()
+
+    con.commit()
+    msg = "Record successfully added"
+    print(msg)
+
+    response_body = {'user_id': user_id}
+    print("user_id=" + str(user_id))
+    con.close()
+
+    return response_body
+
 
 @app.route('/userData/', methods=['POST'])
 @cross_origin()
