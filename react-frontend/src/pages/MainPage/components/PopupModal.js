@@ -24,12 +24,15 @@ const PopupModal = (props) => {
   };
 
   const storeData = (passInUpdated) => {
+    console.log("img name: ",props.imgName);
     let data = {
-      userInputTime: userInputTime,
-      firstEstimation: firstEstimation,
-      updatedEstimation: passInUpdated
+      user_id: localStorage.getItem("user-id"),
+      q_id:props.imgName.split(".")[0],
+      resp_time: userInputTime,
+      init_guess: firstEstimation,
+      final_guess: passInUpdated
     };
-    request({ url: `${Api}userData/`, method:"POST",data: data }).then(
+    request({ url: `${Api}answer`, method:"POST",data: data }).then(
       res => {
         console.log(res);
       }
@@ -53,7 +56,7 @@ const PopupModal = (props) => {
   };
 
   useEffect(() => {
-    setDeadline(Date.now() + 1000 * props.modalTimesUp);
+    setDeadline(Date.now() + 1000 * props.modalCountDown);
   }, [firstConfirm]);
 
   return (
