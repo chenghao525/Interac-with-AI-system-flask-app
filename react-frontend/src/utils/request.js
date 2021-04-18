@@ -24,7 +24,7 @@ export function startReq(data) {
             if (res.status === 200) {
                 // returned items
                 console.log('success', res);
-                localStorage.setItem('user-id', res.body.user_id)
+                localStorage.setItem('user-id', res.body["user_id"]);
                 return res;
             }
             else {
