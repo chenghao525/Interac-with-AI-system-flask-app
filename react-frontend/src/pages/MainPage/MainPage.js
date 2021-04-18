@@ -42,7 +42,7 @@ const MainPage = () => {
   };
 
   const getUserData = () => {
-    let url = `${Api}userInfo?userID=` + localStorage.getItem("user-id");
+    let url = `${Api}userInfo/?userID=` + localStorage.getItem("user-id");
     request({ url: url, method:"GET"}).then(
       res => {
         console.log(res);

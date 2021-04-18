@@ -10,7 +10,7 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/start/', methods=['POST'])
+@app.route('/start', methods=['POST'])
 @cross_origin()
 def start():
     body_decoded = request.get_json()
@@ -63,7 +63,7 @@ def start():
     # return jsonify(response_body)
 
 
-@app.route('/userInfo/', methods=['GET'])
+@app.route('/userInfo', methods=['GET'])
 @cross_origin()
 def getUserData():
     user_id = request.args.get('userID')
@@ -108,7 +108,7 @@ def inputAnswer():
     return response_body
 
 
-@app.route('/imageInfo/', methods=['GET'])
+@app.route('/imageInfo', methods=['GET'])
 @cross_origin()
 def getImageInfo():
     q_id = request.args.get('q_id')
@@ -124,7 +124,7 @@ def getImageInfo():
     return response_body
 
 
-@app.route('/userData/', methods=['POST'])
+@app.route('/userData', methods=['POST'])
 @cross_origin()
 def userData():
     body_decoded = request.get_json()
