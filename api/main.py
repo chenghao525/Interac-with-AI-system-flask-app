@@ -27,14 +27,14 @@ def start():
     q_order_easy = " ".join(q_easy)
 
     l_hard = random.sample(l, len(l))
-    q_hard = ["E" + str(q) for q in l_hard]
+    q_hard = ["H" + str(q) for q in l_hard]
     q_order_hard = " ".join(q_hard)
 
     diff_order = random.choice([0, 1])
     if diff_order == 0:
-        q_order = q_order_easy + q_order_hard
+        q_order = q_order_easy + " " + q_order_hard
     else:
-        q_order = q_order_hard + q_order_easy
+        q_order = q_order_hard + " " + q_order_easy
 
     timing_level = random.choice([0, 1])
     if timing_level == 0:
