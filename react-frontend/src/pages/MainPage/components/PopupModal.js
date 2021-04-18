@@ -53,7 +53,7 @@ const PopupModal = (props) => {
   };
 
   useEffect(() => {
-    setDeadline(Date.now() + 1000 * 2);
+    setDeadline(Date.now() + 1000 * props.modalTimesUp);
   }, [firstConfirm]);
 
   return (

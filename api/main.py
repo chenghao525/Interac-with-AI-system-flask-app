@@ -79,7 +79,7 @@ def getUserData():
     return response_body
 
 
-@app.route('/Answer', methods=['POST'])
+@app.route('/answer', methods=['POST'])
 @cross_origin()
 def inputAnswer():
     body_decoded = request.get_json()

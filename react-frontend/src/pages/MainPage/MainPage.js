@@ -18,15 +18,15 @@ const MainPage = () => {
   const [openModal, setOpenModal] = useState(false);
   const [deadline, setDeadline] = useState(0);
   const [deleteImg, setDeleteImg] = useState(false);
+  const [firstCountDown, setFirstCountDown] = useState(Date.now() + 1000 * 5);
+  const [modalCountDown, setModalCountDown] = useState(Date.now() + 1000 * 5);
 
   const deadlineValue = Date.now() + 1000 * 2;
-
   const { Countdown } = Statistic;
 
   const handleCountdownFinished = () => {
     setDeleteImg(true);
     setOpenModal(true);
-    console.log("Finished!");
   };
 
   const modalTimesUp = () => {
@@ -41,16 +41,18 @@ const MainPage = () => {
     setDeadline(Date.now() + 1000 * 2);
   };
 
-  // const getData = () => {
-  //   request({ url: `${Api}getData/`, method:"GET"}).then(
-  //     res => {
-  //       console.log(res.data);
-  //     }
-  //   );
-  // };
+  const getUserData = () => {
+    let url = `${Api}userInfo?userID=` + localStorage.getItem("user-id");
+    request({ url: url, method:"GET"}).then(
+      res => {
+        console.log(res);
+      }
+    );
+  };
 
   useEffect(() => {
-    setDeadline(deadlineValue);
+    getUserData();
+    // setDeadline(deadlineValue);
   }, []);
 
   return (
@@ -82,6 +84,7 @@ const MainPage = () => {
       <PopupModal
         openModal={openModal}
         modalTimesUp={modalTimesUp}
+        modalCountDown={modalCountDown}
       ></PopupModal>
     </div>
   );
