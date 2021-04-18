@@ -97,9 +97,9 @@ def inputAnswer():
 
     cur.execute('INSERT INTO Guess (user_id, q_id, init_guess, final_guess, resp_time) VALUES(?, ?, ?, ?, ?)',
                 [user_id, q_id, init_guess, final_guess, resp_time])
+    con.commit()
     con.close()
 
-    con.commit()
     msg = "Record successfully added"
     print(msg)
 
