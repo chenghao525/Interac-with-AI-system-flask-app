@@ -5,15 +5,17 @@ import MainPage from "../../pages/MainPage/MainPage";
 import StarterPage from "../../pages/StarterPage/StarterPage";
 import PageNotFound from '../../pages/404';
 import QuestionPage from "../../pages/QuestionPage/QuestionPage";
+import DemographicPage from "../../pages/DemographicPage/DemographicPage";
 
 const Router = () => {
   return (
     <Switch>
-      <Route exact path="/questionnaire" component={QuestionPage} />
-      <Route exact path="/mainpage" component={MainPage} />
-      <Route exact path="/404" component={PageNotFound} />
-      <Route path="/" component={StarterPage} />
-      <Redirect exact to="/404" />
+        <Route exact path="/demographic" component={DemographicPage} />
+        <Route exact path="/questionnaire" component={QuestionPage} />
+        <Route exact path="/mainpage" component={MainPage} />
+        <Route exact path="/404" component={PageNotFound} />
+        <Route path="/" component={StarterPage} />
+        <Redirect exact to="/404" />
     </Switch>
   )
 }
