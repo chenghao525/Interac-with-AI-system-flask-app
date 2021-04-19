@@ -10,5 +10,3 @@ switch (process.env.NODE_ENV) {
     default:
         Api = 'http://127.0.0.1:5000/';
 }
-
-export { Api };
