@@ -12,6 +12,7 @@ const PopupModal = (props) => {
   const [nowTime, setNowTime] = useState(Date.now());
   const [userInputTime, setUserInputTime] = useState(Date.now());
   const [questionId, setQuestionId] = useState("");
+  const [AISuggestion, setAISuggestion] = useState(0);
 
   const handleCountdownFinished = () => {
     if (updatedEstimation === 0) {
@@ -25,10 +26,9 @@ const PopupModal = (props) => {
   };
 
   const storeData = (passInUpdated) => {
-
     let data = {
       user_id: localStorage.getItem("user-id"),
-      q_id:questionId,
+      q_id: questionId,
       resp_time: userInputTime,
       init_guess: firstEstimation,
       final_guess: passInUpdated
@@ -36,6 +36,18 @@ const PopupModal = (props) => {
     request({ url: `${Api}answer`, method:"POST", data: data }).then(
       res => {
         console.log(res);
+      }
+    );
+  };
+
+  const getAISuggestion = () => {
+    let url = `${Api}imageInfo?q_id=` + questionId;
+    request({ url: url, method:"GET"})
+    .then(response => response.json())
+    .then(
+      res => {
+        let aiSugg = res['ai'];
+        setAISuggestion(aiSugg);
       }
     );
   };
@@ -59,6 +71,7 @@ const PopupModal = (props) => {
 
   useEffect(() => {
     setQuestionId(props.imgName.split(".")[0]);
+    getAISuggestion();
   }, [props.imgName]);
 
   return (
