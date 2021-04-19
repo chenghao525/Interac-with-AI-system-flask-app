@@ -74,6 +74,7 @@ cur.execute('INSERT INTO Image (q_id, truth, orig_img_name) VALUES(?, ?, ?)', ['
 cur.execute('INSERT INTO Image (q_id, truth, orig_img_name) VALUES(?, ?, ?)', ['H3', 49, 'MAIVb2013a_000035'])
 cur.execute('INSERT INTO Image (q_id, truth, orig_img_name) VALUES(?, ?, ?)', ['H4', 46, 'MAIVb2012a_000595'])
 cur.execute('INSERT INTO Image (q_id, truth, orig_img_name) VALUES(?, ?, ?)', ['H5', 47, 'MAIVb2013a_000120'])
+conn.commit()
 
 conn.close()
 

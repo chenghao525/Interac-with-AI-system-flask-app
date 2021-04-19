@@ -49,6 +49,7 @@ const MainPage = () => {
     .then(response => response.json())
     .then(
       res => {
+        console.log("success", res);
         let imageString = res['q_order']
         formatImageList(imageString);
         setModalCountDown(res['timing']);

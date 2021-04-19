@@ -35,13 +35,14 @@ const PopupModal = (props) => {
     };
     request({ url: `${Api}answer`, method:"POST", data: data }).then(
       res => {
-        console.log(res);
+        console.log("success", res);
       }
     );
   };
 
   const getAISuggestion = () => {
-    let url = `${Api}imageInfo?q_id=` + questionId;
+    let url = `${Api}imageInfo?q_id=` + localStorage.getItem("q_id");
+    console.log("question_id", localStorage.getItem("q_id"));
     request({ url: url, method:"GET"})
     .then(response => response.json())
     .then(
@@ -70,7 +71,9 @@ const PopupModal = (props) => {
   };
 
   useEffect(() => {
-    setQuestionId(props.imgName.split(".")[0]);
+    localStorage.setItem('q_id', props.imgName[0] + props.imgName[1]);
+    // setQuestionId(props.imgName[0] + props.imgName[1]);
+    console.log("question_id saved", localStorage.getItem("q_id"));
     getAISuggestion();
   }, [props.imgName]);
 
