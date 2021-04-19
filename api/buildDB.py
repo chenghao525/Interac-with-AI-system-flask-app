@@ -24,21 +24,18 @@ conn.execute('CREATE TABLE User ('
 conn.execute('CREATE TABLE Guess ('
              'user_id INTEGER NOT NULL, '
              'q_id TEXT NOT NULL, '
-             'img_path TEXT NOT NULL, '
              'init_guess INTEGER, '
              'final_guess INTEGER, '
              'resp_time INTEGER)')
 
 # Image Table
 # 1. q_id: String - Question ID
-# 2. img_path: String - Image Path
 # 3. truth: Integer - Ground Truth
-# 4. ai: Integer - AI Guess
+# 2. orig_img_name: String - Image Path
 conn.execute('CREATE TABLE Image ('
              'q_id TEXT NOT NULL, '
-             'img_path TEXT NOT NULL, '
-             'truth INTEGER NOT NULL, '
-             'ai INTEGER NOT NULL)')
+             'truth INTEGER NOT NULL,'
+             'orig_img_name TEXT NOT NULL)')
 
 # Test Add Value
 consent = -1
@@ -58,13 +55,25 @@ cur.execute('DELETE FROM Guess WHERE user_id=?', [user_id])
 conn.commit()
 
 q_id = 'E1'
-img_path = '/images/'
 truth = 30
-ai = 28
-cur.execute('INSERT INTO Image (q_id, img_path, truth, ai) VALUES(?, ?, ?, ?)', [q_id, img_path, truth, ai])
+orig_img_name = 'abc'
+cur.execute('INSERT INTO Image (q_id, truth, orig_img_name) VALUES(?, ?, ?)', [q_id, truth, orig_img_name])
 cur.execute('DELETE FROM Image WHERE q_id=?', [q_id])
 conn.commit()
 
 print("Table created successfully")
+
+# Add Ground Truth Info
+cur.execute('INSERT INTO Image (q_id, truth, orig_img_name) VALUES(?, ?, ?)', ['E1', 29, 'PETEc2013a_000040'])
+cur.execute('INSERT INTO Image (q_id, truth, orig_img_name) VALUES(?, ?, ?)', ['E2', 29, 'PETEc2013a_000884'])
+cur.execute('INSERT INTO Image (q_id, truth, orig_img_name) VALUES(?, ?, ?)', ['E3', 35, 'NEKOc2013c_000145'])
+cur.execute('INSERT INTO Image (q_id, truth, orig_img_name) VALUES(?, ?, ?)', ['E4', 30, 'PETEc2014a_000759'])
+cur.execute('INSERT INTO Image (q_id, truth, orig_img_name) VALUES(?, ?, ?)', ['E5', 34, 'PETEc2013a_000262'])
+cur.execute('INSERT INTO Image (q_id, truth, orig_img_name) VALUES(?, ?, ?)', ['H1', 60, 'MAIVb2012a_000016'])
+cur.execute('INSERT INTO Image (q_id, truth, orig_img_name) VALUES(?, ?, ?)', ['H2', 39, 'MAIVb2012a_000362'])
+cur.execute('INSERT INTO Image (q_id, truth, orig_img_name) VALUES(?, ?, ?)', ['H3', 49, 'MAIVb2013a_000035'])
+cur.execute('INSERT INTO Image (q_id, truth, orig_img_name) VALUES(?, ?, ?)', ['H4', 46, 'MAIVb2012a_000595'])
+cur.execute('INSERT INTO Image (q_id, truth, orig_img_name) VALUES(?, ?, ?)', ['H5', 47, 'MAIVb2013a_000120'])
+
 conn.close()
 

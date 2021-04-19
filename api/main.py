@@ -12,6 +12,7 @@ app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
+
 @app.route('/start', methods=['POST'])
 @cross_origin()
 def start():
@@ -25,7 +26,7 @@ def start():
 
     l = list(range(1, 6))
     l_easy = random.sample(l, len(l))
-    q_easy= ["E" + str(q) for q in l_easy]
+    q_easy = ["E" + str(q) for q in l_easy]
     q_order_easy = " ".join(q_easy)
 
     l_hard = random.sample(l, len(l))
@@ -55,8 +56,9 @@ def start():
     user_id = cur.execute("SELECT last_insert_rowid()").fetchone()[0]
 
     response_body = {'user_id': user_id}
+    con.close()
 
-    return response_body
+    return jsonify(response_body)
 
     #
     # print("user_id=" + str(user_id))
@@ -78,7 +80,7 @@ def getUserData():
     con.close()
 
     response_body = {'user_id': user_id, 'q_order': q_order, "timing": timing}
-    return response_body
+    return jsonify(response_body)
 
 
 @app.route('/answer', methods=['POST'])
@@ -107,7 +109,7 @@ def inputAnswer():
     print("user_id=" + str(user_id))
     con.close()
 
-    return response_body
+    return jsonify(response_body)
 
 
 @app.route('/imageInfo', methods=['GET'])
@@ -119,11 +121,11 @@ def getImageInfo():
     cur = con.cursor()
 
     truth = cur.execute('SELECT truth FROM Image WHERE q_id =(?) ;', [q_id]).fetchone()[0]
-    ai = round(random.sample(range(10,21), 1) * truth / 100) + truth
+    ai = round(random.sample(range(10, 21), 1) * truth / 100) + truth
     con.close()
 
     response_body = {'q_id': q_id, 'ai': ai}
-    return response_body
+    return jsonify(response_body)
 
 
 if __name__ == "__main__":
