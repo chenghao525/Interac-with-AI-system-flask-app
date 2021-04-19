@@ -66,6 +66,7 @@ const MainPage = () => {
       str += ".jpg";
       imgList.push(str);
     }
+    setImgName(imgList[0]);
     setImageList(imgList);
   }
 
@@ -88,7 +89,7 @@ const MainPage = () => {
           <div className="img-frame-container">
             <div className="img-frame">
               {deleteImg ? (
-                <img src={baseImgUrl + "blank.jpg"}></img>
+                <img src={baseImgUrl + "blank.jpeg"}></img>
               ) : (
                 <img src={baseImgUrl + imageList[imgIndex]}></img>
               )}
