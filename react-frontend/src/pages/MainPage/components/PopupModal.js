@@ -11,6 +11,7 @@ const PopupModal = (props) => {
   const [firstConfirm, setFirstConfim] = useState(false);
   const [nowTime, setNowTime] = useState(Date.now());
   const [userInputTime, setUserInputTime] = useState(Date.now());
+  const [questionId, setQuestionId] = useState("");
 
   const handleCountdownFinished = () => {
     if (updatedEstimation === 0) {
@@ -24,10 +25,10 @@ const PopupModal = (props) => {
   };
 
   const storeData = (passInUpdated) => {
-    console.log("img name: ",props);
+
     let data = {
       user_id: localStorage.getItem("user-id"),
-      q_id:props.imgName.split(".")[0],
+      q_id:questionId,
       resp_time: userInputTime,
       init_guess: firstEstimation,
       final_guess: passInUpdated
@@ -56,9 +57,9 @@ const PopupModal = (props) => {
     setUserInputTime(((Date.now() - nowTime) / 1000).toFixed(2));
   };
 
-  // useEffect(() => {
-    
-  // }, [firstConfirm]);
+  useEffect(() => {
+    setQuestionId(props.imgName.split(".")[0]);
+  }, [props.imgName]);
 
   return (
     <Modal
