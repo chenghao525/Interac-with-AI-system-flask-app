@@ -75,8 +75,8 @@ def getUserData():
     con = sql.connect(os.path.join(os.getcwd(), 'api/database.db'))
     cur = con.cursor()
 
-    q_order = cur.execute('SELECT q_order FROM User WHERE rowid =(?) ;', [user_id]).fetchone()[0]
-    timing = cur.execute('SELECT timing FROM User WHERE rowid =(?) ;', [user_id]).fetchone()[0]
+    q_order = cur.execute('SELECT q_order FROM User WHERE rowid =(?) ;', [int(user_id)]).fetchone()[0]
+    timing = cur.execute('SELECT timing FROM User WHERE rowid =(?) ;', [int(user_id)]).fetchone()[0]
     con.close()
 
     response_body = {'user_id': user_id, 'q_order': q_order, "timing": timing}
