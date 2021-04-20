@@ -19,8 +19,7 @@ app = Flask(__name__, static_url_path='', static_folder=os.path.join(os.getcwd()
 @app.route("/")
 def serve():
     """serves React App"""
-    return send_from_directory(app.static_folder, 'index.html')
-
+    return app.send_static_file('index.html')
 
 # @app.route("/<path:path>")
 # def static_proxy(path):
@@ -28,8 +27,6 @@ def serve():
 #     file_name = path.split("/")[-1]
 #     dir_name = os.path.join(app.static_folder, "/".join(path.split("/")[:-1]))
 #     return send_from_directory(dir_name, file_name)
-
-
 
 
 @app.route('/start', methods=['POST'])
