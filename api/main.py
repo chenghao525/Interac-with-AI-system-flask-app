@@ -9,7 +9,7 @@ import random
 import os
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='', static_folder='react-frontend/build')
 
 # cors = CORS(app)
 # app.config['CORS_HEADERS'] = 'Content-Type'
