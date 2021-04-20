@@ -10,5 +10,3 @@ switch (process.env.NODE_ENV) {
     default:
         Api = 'https://penguin-ai.herokuapp.com/';
 }
-
-export { Api };
