@@ -121,7 +121,15 @@ def getImageInfo():
     cur = con.cursor()
 
     truth = cur.execute('SELECT truth FROM Image WHERE q_id =(?) ;', [q_id]).fetchone()[0]
-    ai = round(random.sample(range(10, 21), 1) * truth / 100) + truth
+
+    rand_num = round(random.sample(range(10, 21), 1)[0] * truth / 100)
+    rand_var = random.sample(range(0, 2), 1)[0]
+
+    if rand_var == 1:
+        ai = truth + rand_num
+    else:
+        ai = truth - rand_num
+
     con.close()
 
     response_body = {'q_id': q_id, 'ai': ai}

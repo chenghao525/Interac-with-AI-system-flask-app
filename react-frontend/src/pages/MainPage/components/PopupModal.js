@@ -35,6 +35,7 @@ const PopupModal = (props) => {
       init_guess: firstEstimation,
       final_guess: passInUpdated,
     };
+
     request({ url: `${Api}answer`, method: "POST", data: data }).then((res) => {
       console.log(res);
     });
@@ -46,9 +47,26 @@ const PopupModal = (props) => {
       .then((response) => response.json())
       .then((res) => {
         let aiSugg = res["ai"];
-        setAISuggestion(aiSugg);
-      });
-  };
+
+    request({ url: `${Api}answer`, method:"POST", data: data }).then(
+      res => {
+        console.log("success", res);
+      }
+    );
+  })};
+
+  // const getAISuggestion = () => {
+  //   let url = `${Api}imageInfo?q_id=` + localStorage.getItem("q_id");
+  //   console.log("question_id", localStorage.getItem("q_id"));
+  //   request({ url: url, method:"GET"})
+  //   .then(response => response.json())
+  //   .then(
+  //     res => {
+  //       let aiSugg = res['ai'];
+
+  //       setAISuggestion(aiSugg);
+  //     });
+  // };
 
   const clearModal = () => {
     setFirstEstimation(0);
@@ -79,7 +97,12 @@ const PopupModal = (props) => {
     if(props.imgName === undefined ) return;
     let qId = props.imgName.split(".")[0];
     setQuestionId(qId);
-    // getAISuggestion(qId); 
+    getAISuggestion(qId); 
+
+    // localStorage.setItem('q_id', props.imgName[0] + props.imgName[1]);
+    // // setQuestionId(props.imgName[0] + props.imgName[1]);
+    // console.log("question_id saved", localStorage.getItem("q_id"));
+    // getAISuggestion();
   }, [props.imgName]);
 
   return (
