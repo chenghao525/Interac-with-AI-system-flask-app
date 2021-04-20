@@ -10,7 +10,7 @@ import random
 import os
 
 
-app = Flask(__name__, static_url_path='', static_folder=os.path.join(os.getcwd(), '/react-frontend/build/static'), template_folder=os.path.join(os.getcwd(), '/react-frontend/build/'))
+app = Flask(__name__, static_url_path='', static_folder=os.path.join(os.getcwd(), 'react-frontend/build/static'), template_folder=os.path.join(os.getcwd(), 'react-frontend/build/'))
 
 # cors = CORS(app)
 # app.config['CORS_HEADERS'] = 'Content-Type'
