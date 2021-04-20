@@ -20,7 +20,7 @@
   "scripts": {
     "start": "npm start",
     "start-api": "flask run",
-    "build": "npm build",
+    "build": "react-scripts build",
     "test": "npm test",
     "eject": "npm eject"
   },
