@@ -60,7 +60,7 @@ const PopupModal = (props) => {
 
   const handleConfirm = () => {
     setFirstConfim(true);
-    setDeadline(Date.now() + 1000 * props.modalCountDown);
+    setDeadline(Date.now() + 1000 * 15);
     setNowTime(Date.now());
   };
 
@@ -177,7 +177,7 @@ const PopupModal = (props) => {
                     size="large"
                     onClick={handleNext}
                   >
-                    Next Image
+                    Finish Tryout
                   </Button>
                   </div>
                 ) : (
