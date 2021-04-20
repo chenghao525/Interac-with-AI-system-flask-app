@@ -1,1 +1,1 @@
-web: gunicorn app:api/main --bind 0.0.0.0:${PORT}
+web: python api/main.py --bind 0.0.0.0:${PORT}

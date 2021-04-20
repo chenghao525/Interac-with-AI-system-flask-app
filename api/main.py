@@ -10,7 +10,7 @@ import random
 import os
 
 
-app = Flask(__name__, static_url_path='', static_folder=os.path.join(os.getcwd(), 'react-frontend/build/static'), template_folder=os.path.join(os.getcwd(), 'react-frontend/build/'))
+app = Flask(__name__, static_url_path='', static_folder=os.path.join(os.getcwd(), 'react-frontend/build/'), template_folder=os.path.join(os.getcwd(), 'react-frontend/build/'))
 
 # cors = CORS(app)
 # app.config['CORS_HEADERS'] = 'Content-Type'
@@ -19,7 +19,7 @@ app = Flask(__name__, static_url_path='', static_folder=os.path.join(os.getcwd()
 @app.route("/")
 def serve():
     """serves React App"""
-    return render_template("index.html")
+    return send_from_directory(app.static_folder, 'index.html')
 
 
 # @app.route("/<path:path>")
