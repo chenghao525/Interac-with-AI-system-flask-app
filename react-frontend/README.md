@@ -5,4 +5,4 @@ open -n -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --args
 
 deactivate
 
-python /Users/chenghaosun/Documents/local_github/interact-with-AI-system-flask-app/api/main.py
+/Users/chenghaosun/Documents/local_github/interact-with-AI-system-flask-app/venv/bin/python /Users/chenghaosun/Documents/local_github/interact-with-AI-system-flask-app/api/main.py

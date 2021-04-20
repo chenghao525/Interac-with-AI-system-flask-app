@@ -18,11 +18,11 @@
     "react-router-dom": "^5.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "start-api": "cd .. && venv/bin/flask run --no-debugger",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "npm start",
+    "start-api": "flask run",
+    "build": "npm build",
+    "test": "npm test",
+    "eject": "npm eject"
   },
   "eslintConfig": {
     "extends": [
@@ -42,7 +42,6 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000",
   "devDependencies": {
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0"

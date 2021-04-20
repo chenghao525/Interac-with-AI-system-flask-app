@@ -1,4 +1,4 @@
-from flask import Flask, request, Response, jsonify, json
+from flask import Flask, request, Response, jsonify, json, send_from_directory,render_template
 from flask_cors import CORS, cross_origin
 
 import os
@@ -9,10 +9,26 @@ import random
 import os
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='', static_folder='../react-frontend/build/static',template_folder='../react-frontend/build')
 
 # cors = CORS(app)
 # app.config['CORS_HEADERS'] = 'Content-Type'
+
+
+
+@app.route("/")
+def serve():
+    """serves React App"""
+    return render_template("index.html")
+
+
+# @app.route("/<path:path>")
+# def static_proxy(path):
+#     """static folder serve"""
+#     file_name = path.split("/")[-1]
+#     dir_name = os.path.join(app.static_folder, "/".join(path.split("/")[:-1]))
+#     return send_from_directory(dir_name, file_name)
+
 
 
 @app.route('/start', methods=['POST'])
