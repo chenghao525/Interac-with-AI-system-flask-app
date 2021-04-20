@@ -13,14 +13,14 @@ import DemographicPage from "../../pages/DemographicPage/DemographicPage";
 const Router = () => {
   return (
     <Switch>
-      <Route exact path="/trailPage" component={TrailPage} />
-      <Route exact path="/readyPage" component={ReadyPage} />
-      <Route exact path="/demographic" component={DemographicPage} />
-      <Route exact path="/questionnaire" component={QuestionPage} />
-      <Route exact path="/mainpage" component={MainPage} />
-      <Route exact path="/404" component={PageNotFound} />
-      <Route path="/" component={StarterPage} />
-      <Redirect exact to="/404" />
+        <Route path="/" component={StarterPage} />
+        <Route exact path="/trailPage" component={TrailPage} />
+        <Route exact path="/readyPage" component={ReadyPage} />
+        <Route exact path="/demographic" component={DemographicPage} />
+        <Route exact path="/questionnaire" component={QuestionPage} />
+        <Route exact path="/mainpage" component={MainPage} />
+        <Route exact path="/404" component={PageNotFound} />
+
     </Switch>
   )
 }

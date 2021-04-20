@@ -1,6 +1,8 @@
 from flask import Flask, request, Response, jsonify, json
 from flask_cors import CORS, cross_origin
 
+from flask_restful import Api
+
 import os
 
 import sqlite3 as sql
@@ -9,11 +11,10 @@ import random
 import os
 
 
-app = Flask(__name__, static_url_path='', static_folder='react-frontend/build')
+app = Flask(__name__, static_url_path='https://penguin-ai.herokuapp.com/', static_folder='react-frontend/build')
 
 # cors = CORS(app)
 # app.config['CORS_HEADERS'] = 'Content-Type'
-
 
 @app.route('/start', methods=['POST'])
 @cross_origin()
