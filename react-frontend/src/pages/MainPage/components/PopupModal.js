@@ -28,10 +28,13 @@ const PopupModal = (props) => {
   };
 
   const storeData = (passInUpdated) => {
+    let responseTime = 0;
+    if(userInputTime === 0) responseTime = props.modalCountDown;
+    else responseTime = userInputTime
     let data = {
       user_id: localStorage.getItem("user-id"),
       q_id: questionId,
-      resp_time: userInputTime,
+      resp_time: responseTime,
       init_guess: firstEstimation,
       final_guess: passInUpdated,
     };
@@ -47,12 +50,8 @@ const PopupModal = (props) => {
       .then((response) => response.json())
       .then((res) => {
         let aiSugg = res["ai"];
-
-    request({ url: `${Api}answer`, method:"POST", data: data }).then(
-      res => {
-        console.log("success", res);
-      }
-    );
+        console.log("aiSugg", aiSugg)
+        setAISuggestion(aiSugg);
   })};
 
   // const getAISuggestion = () => {
@@ -74,6 +73,7 @@ const PopupModal = (props) => {
     setFirstConfim(false);
     setInputDiabled(false);
     setShowNextBtn(false);
+    setUserInputTime(0);
   };
 
   const handleConfirm = () => {
@@ -93,11 +93,13 @@ const PopupModal = (props) => {
   };
 
   useEffect(() => {
-    console.log("Once")
     if(props.imgName === undefined ) return;
     let qId = props.imgName.split(".")[0];
-    setQuestionId(qId);
-    getAISuggestion(qId); 
+    if(qId.length !== 0){
+      setQuestionId(qId);
+      getAISuggestion(qId); 
+    }
+    
 
     // localStorage.setItem('q_id', props.imgName[0] + props.imgName[1]);
     // // setQuestionId(props.imgName[0] + props.imgName[1]);
@@ -158,7 +160,7 @@ const PopupModal = (props) => {
               <Col span={12}>
                 <div className="modal-col">
                   <div className="estimate-text">AI's suggestion:</div>
-                  <div className="text-box">25</div>
+                  <div className="text-box">{AISuggestion}</div>
                 </div>
               </Col>
             </Row>
