@@ -5,7 +5,7 @@ if (!window.location.origin) {
 }
 switch (process.env.NODE_ENV) {
     case 'development':
-        Api = 'http://127.0.0.1:5000';  // Localhost
+        Api = window.location.origin;  // Localhost
         break;
     case 'production':
         Api = window.location.origin;

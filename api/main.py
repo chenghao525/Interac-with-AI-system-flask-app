@@ -12,9 +12,9 @@ import os
 
 app = Flask(__name__, static_url_path='', static_folder=os.path.join(os.getcwd(), 'react-frontend/build'), template_folder=os.path.join(os.getcwd(), 'react-frontend/build'))
 
-cors = CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
-
+# cors = CORS(app)
+# app.config['CORS_HEADERS'] = 'Content-Type'
+#
 
 @app.route("/", methods=['GET', 'POST'])
 def serve():
