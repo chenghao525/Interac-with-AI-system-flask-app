@@ -2,7 +2,7 @@ let Api = '';
 
 switch (process.env.NODE_ENV) {
     case 'development':
-        Api = 'https://penguin-ai.herokuapp.com/';  // Localhost
+        Api = 'http://127.0.0.1:5000/';  // Localhost
         break;
     case 'production':
         Api = 'https://penguin-ai.herokuapp.com/';
@@ -10,3 +10,5 @@ switch (process.env.NODE_ENV) {
     default:
         Api = 'https://penguin-ai.herokuapp.com/';
 }
+
+export {Api};

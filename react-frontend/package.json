@@ -18,7 +18,7 @@
     "react-router-dom": "^5.2.0"
   },
   "scripts": {
-    "start": "npm start",
+    "start": "react-scripts start",
     "start-api": "flask run",
     "build": "react-scripts build",
     "test": "npm test",
@@ -43,6 +43,7 @@
     ]
   },
   "devDependencies": {
+    "express": "^4.17.1",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0"
   },
