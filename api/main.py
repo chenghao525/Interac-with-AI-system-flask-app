@@ -1,5 +1,6 @@
-from flask import Flask, request, Response, jsonify, json
+from flask import Flask, request, Response, jsonify, json, send_from_directory,render_template
 from flask_cors import CORS, cross_origin
+from flask_restful import Api
 
 import os
 
@@ -19,6 +20,16 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 def serve():
     """serves React App"""
     return app.send_static_file('index.html')
+<<<<<<< HEAD
+=======
+
+# @app.route("/<path:path>")
+# def static_proxy(path):
+#     """static folder serve"""
+#     file_name = path.split("/")[-1]
+#     dir_name = os.path.join(app.static_folder, "/".join(path.split("/")[:-1]))
+#     return send_from_directory(dir_name, file_name)
+>>>>>>> main
 
 
 @app.route('/start', methods=['POST'])
@@ -67,12 +78,6 @@ def start():
     con.close()
 
     return jsonify(response_body)
-
-    #
-    # print("user_id=" + str(user_id))
-    # con.close()
-
-    # return jsonify(response_body)
 
 
 @app.route('/userInfo', methods=['GET'])
@@ -147,3 +152,4 @@ def getImageInfo():
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', debug=False, port=port)
+
