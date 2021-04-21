@@ -14,4 +14,4 @@ switch (process.env.NODE_ENV) {
         Api = window.location.origin;
 }
 
-export { Api };
+export {Api};
