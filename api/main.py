@@ -9,10 +9,16 @@ import random
 import os
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='', static_folder=os.path.join(os.getcwd(), 'react-frontend/build'), template_folder=os.path.join(os.getcwd(), 'react-frontend/build'))
 
-# cors = CORS(app)
-# app.config['CORS_HEADERS'] = 'Content-Type'
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
+
+
+@app.route("/", methods=['GET', 'POST'])
+def serve():
+    """serves React App"""
+    return app.send_static_file('index.html')
 
 
 @app.route('/start', methods=['POST'])
@@ -140,4 +146,4 @@ def getImageInfo():
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='127.0.0.1', port=port)
