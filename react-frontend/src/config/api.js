@@ -1,14 +1,17 @@
 let Api = '';
 
+if (!window.location.origin) {
+  window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '');
+}
 switch (process.env.NODE_ENV) {
     case 'development':
-        Api = 'http://127.0.0.1:5000/';  // Localhost
+        Api = window.location.origin;  // Localhost
         break;
     case 'production':
-        Api = 'https://penguin-ai.herokuapp.com/';
+        Api = window.location.origin;
         break;
     default:
-        Api = 'https://penguin-ai.herokuapp.com/';
+        Api = window.location.origin;
 }
 
-export { Api };
+export {Api};
