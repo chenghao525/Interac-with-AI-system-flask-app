@@ -20,8 +20,6 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 def serve():
     """serves React App"""
     return app.send_static_file('index.html')
-<<<<<<< HEAD
-=======
 
 # @app.route("/<path:path>")
 # def static_proxy(path):
@@ -29,8 +27,6 @@ def serve():
 #     file_name = path.split("/")[-1]
 #     dir_name = os.path.join(app.static_folder, "/".join(path.split("/")[:-1]))
 #     return send_from_directory(dir_name, file_name)
->>>>>>> main
-
 
 @app.route('/start', methods=['POST'])
 @cross_origin()
