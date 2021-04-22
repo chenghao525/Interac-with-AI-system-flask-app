@@ -1,1 +1,1 @@
-web: gunicorn --bind 0.0.0.0:${PORT} wsgi
+web: python api/main.py --bind 127.0.0.1:${PORT}
