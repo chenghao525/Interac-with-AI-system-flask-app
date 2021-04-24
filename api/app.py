@@ -84,9 +84,7 @@ class Image(db.Model):
 @app.route('/')
 def index():
     """serves React App"""
-    return "<h1>Welcome to our server !!</h1>"
-    # return app.send_static_file('index.html')
-
+    return app.send_static_file('index.html')
 
 @app.route('/start', methods=['POST'])
 @cross_origin()
