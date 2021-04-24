@@ -81,10 +81,11 @@ class Image(db.Model):
         self.orig_img_name = orig_img_name
 
 
-@app.route("/", methods=['GET', 'POST'])
-def serve():
+@app.route('/')
+def index():
     """serves React App"""
-    return app.send_static_file('index.html')
+    return "<h1>Welcome to our server !!</h1>"
+    # return app.send_static_file('index.html')
 
 
 @app.route('/start', methods=['POST'])
