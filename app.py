@@ -184,6 +184,7 @@ def getImageInfo():
         ai = truth - rand_num
 
     response_body = {'q_id': q_id, 'ai': ai}
+
     render_template('index.html')
     return jsonify(response_body)
 
