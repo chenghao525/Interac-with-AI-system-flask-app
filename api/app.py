@@ -35,7 +35,7 @@ db = SQLAlchemy(app)
 # 2. q_order: String (0 or 1) - question order: E7 E3 E2 ... E4 H7 H1 H4 ... H6
 # 3. timing: Integer (0 or 1) - timing constraint for changing answer: short(0) or long(1)
 class User(db.Model):
-    consent = db.Column(db.Integer, nullable=False)
+    consent = db.Column(db.Integer, nullable=False, primary_key=True)
     q_order = db.Column(db.String(120), nullable=False)
     timing = db.Column(db.Integer, nullable=False)
 
@@ -52,7 +52,7 @@ class User(db.Model):
 # 4. final_guess: Integer -  Final Guess
 # 5. resp_time: Integer - Response Time (in seconds)
 class Guess(db.Model):
-    user_id = db.Column(db.Integer, nullable=False)
+    user_id = db.Column(db.Integer, nullable=False, primary_key=True)
     q_id = db.Column(db.String(20), nullable=False)
     init_guess = db.Column(db.Integer, nullable=False)
     final_guess = db.Column(db.Integer, nullable=False)
@@ -71,7 +71,7 @@ class Guess(db.Model):
 # 2. truth: Integer - Ground Truth
 # 3. orig_img_name: String - Image Path
 class Image(db.Model):
-    q_id = db.Column(db.String(20), nullable=False)
+    q_id = db.Column(db.String(20), nullable=False, primary_key=True)
     truth = db.Column(db.Integer, nullable=False)
     orig_img_name = db.Column(db.String(120), nullable=False)
 
