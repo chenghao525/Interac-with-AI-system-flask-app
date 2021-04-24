@@ -10,7 +10,7 @@ import os
 import urllib.parse as urlparse
 from urllib.parse import urlencode
 
-app = Flask(__name__, static_url_path='', static_folder=os.path.join(os.getcwd(), 'react-frontend/build'),
+app = Flask('api', static_url_path='', static_folder=os.path.join(os.getcwd(), 'react-frontend/build'),
             template_folder=os.path.join(os.getcwd(), 'react-frontend/build'))
 
 #cors = CORS(app)
@@ -84,7 +84,7 @@ class Image(db.Model):
 @app.route('/')
 def index():
     """serves React App"""
-    return app.send_static_file(os.path.join(os.getcwd(), 'react-frontend/build/index.html'))
+    return app.send_static_file('index.html')
 
 @app.route('/start', methods=['POST'])
 @cross_origin()
