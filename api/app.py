@@ -27,7 +27,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['SQLALCHEMY_DATABASE_URI'] = urlparse.urlunparse(url_parts)
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-db = psycopg2.connect(DATABASE_URL, sslmode='require')
+db = SQLAlchemy(app)
 
 # User - User Table
 # User ID == Row Number
