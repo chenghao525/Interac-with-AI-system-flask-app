@@ -35,13 +35,13 @@ const PopupModal = (props) => {
       init_guess: firstEstimation,
       final_guess: passInUpdated,
     };
-    request({ url: `${Api}answer`, method: "POST", data: data }).then((res) => {
+    request({ url: `${Api}/answer`, method: "POST", data: data }).then((res) => {
       console.log(res);
     });
   };
 
   const getAISuggestion = (qId) => {
-    let url = `${Api}imageInfo?q_id=` + qId;
+    let url = `${Api}/imageInfo?q_id=` + qId;
     request({ url: url, method: "GET" })
       .then((response) => response.json())
       .then((res) => {
