@@ -1,4 +1,4 @@
-from flask import Flask, request, Response, jsonify, json
+from flask import Flask, request, Response, jsonify, json, render_template
 from flask_cors import CORS, cross_origin
 from flask_sqlalchemy import SQLAlchemy
 
@@ -83,7 +83,7 @@ class Image(db.Model):
 @app.route('/')
 def index():
     """serves React App"""
-    return app.send_static_file('index.html')
+    return render_template('index.html')
 
 @app.route('/start', methods=['POST'])
 @cross_origin()
