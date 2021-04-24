@@ -2,7 +2,7 @@ from flask import Flask, request, Response, jsonify, json
 from flask_cors import CORS, cross_origin
 from flask_sqlalchemy import SQLAlchemy
 
-from boto.s3.connection import S3Connection
+import psycopg2
 
 import random
 import os
@@ -16,7 +16,7 @@ app = Flask(__name__, static_url_path='', static_folder=os.path.join(os.getcwd()
 #cors = CORS(app)
 
 # Get Database_url from Heroku config and add sslmode to query
-DATABASE_URL = S3Connection(os.environ['DATABASE_URL'])
+DATABASE_URL = os.environ['DATABASE_URL']
 params = {'sslmode': 'require'}
 url_parts = list(urlparse.urlparse(DATABASE_URL))
 query = dict(urlparse.parse_qsl(url_parts[4]))
@@ -27,7 +27,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['SQLALCHEMY_DATABASE_URI'] = urlparse.urlunparse(url_parts)
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-db = SQLAlchemy(app)
+db = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 # User - User Table
 # User ID == Row Number
