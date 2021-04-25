@@ -37,7 +37,7 @@ const DemographicPage = () => {
 
     const onFinish = (values) => {
         let url = `${Api}/userDemographic`;
-        request({ url: url, method:"POST"})
+        request({data:values, url: url, method:"POST"})
         .then(response => response.json())
         .then(
           res => {
