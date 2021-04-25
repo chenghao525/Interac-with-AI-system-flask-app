@@ -105,6 +105,35 @@ class Image(db.Model):
         self.orig_img_name = orig_img_name
 
 
+class Survey(db.Model):
+    user_id = db.Column(db.Integer, nullable=False, primary_key=True)
+    q1 = db.Column(db.Integer, nullable=False, primary_key=True)
+    q2 = db.Column(db.Integer, nullable=False)
+    q3 = db.Column(db.Integer, nullable=False)
+    q4 = db.Column(db.Integer, nullable=False)
+    q5 = db.Column(db.Integer, nullable=False)
+    q6 = db.Column(db.Integer, nullable=False)
+    q7 = db.Column(db.Integer, nullable=False)
+    q8 = db.Column(db.Integer, nullable=False)
+    q9 = db.Column(db.Integer, nullable=False)
+    q10 = db.Column(db.String(200), nullable=False)
+    q11 = db.Column(db.String(200), nullable=True)
+
+    def __init__(self, user_id, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11):
+        self.user_id=user_id
+        self.q1 = q1
+        self.q2 = q2
+        self.q3 = q3
+        self.q4 = q4
+        self.q5 = q5
+        self.q6 = q6
+        self.q7 = q7
+        self.q8 = q8
+        self.q9 = q9
+        self.q10 = q10
+        self.q11 = q11
+
+
 @app.route('/')
 @cross_origin()
 def index():
@@ -246,8 +275,44 @@ def getImageInfo():
     return jsonify(response_body)
 
 
+@app.route('/userSurveyData', methods=['POST'])
+@cross_origin()
+def userSurveyData():
+    body_decoded = request.get_json()
+
+    # Demographic - User Table
+    # 1. User ID
+    # 2. Age
+    # 3. Gender
+    # 4. Education
+    # 5. Rate
+    user_id = request.args.get('userID')
+    q1 = body_decoded['q1']
+    q2 = body_decoded['q2']
+    q3 = body_decoded['q3']
+    q4 = body_decoded['q4']
+    q5 = body_decoded['q5']
+    q6 = body_decoded['q6']
+    q7 = body_decoded['q7']
+    q8 = body_decoded['q8']
+    q9 = body_decoded['q9']
+    q10 = body_decoded['q10'].toString()
+    q11 = body_decoded['q11']
+
+    user_survey = Survey(user_id, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11)
+    db.session.add(user_survey)
+    db.session.commit()
+
+    msg = "Record successfully added"
+    print(msg)
+
+    response_body = {'user_id': user_id}
+
+    return jsonify(response_body)
+
+
 if __name__ == "__main__":
-    #db.drop_all()
+    # db.drop_all()
     db.create_all()
 
     # Add Ground Truth Info

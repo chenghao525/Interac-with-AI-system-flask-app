@@ -37,7 +37,6 @@ const DemographicPage = () => {
     const handleFormSubmit = async () => {
         await form.validateFields()
             .then((values) => {
-                    console.log("finished survey", values)
                     let url = `${Api}/userDemographic?userID=` + localStorage.getItem("user-id");
                     request({ url: url, method: "POST", data: values})
                         .then((res) => {
@@ -89,23 +88,6 @@ const DemographicPage = () => {
                     </Select>
                 </Form.Item>
 
-                <Form.Item noStyle shouldUpdate={(prevValues, currentValues) => prevValues.gender !== currentValues.gender}>
-                    {({ getFieldValue }) =>
-                        getFieldValue('gender') === 'other' ? (
-                        <Form.Item
-                          name="customizeGender"
-                          label="Customize Gender"
-                          rules={[
-                            {
-                              required: true,
-                            },
-                          ]}
-                        >
-                            <Input />
-                        </Form.Item>
-                        ) : null
-                    }
-                </Form.Item>
 
                 <Form.Item
                     name = "education"

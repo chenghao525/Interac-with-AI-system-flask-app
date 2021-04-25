@@ -32,7 +32,7 @@ const MainPage = () => {
 
   const modalTimesUp = () => {
     if(imgIndex >= imageList.length - 1){
-      window.location.assign("/#/questionnaire");
+      window.location.assign("/#/survey");
     }
 
     setDeleteImg(false);
