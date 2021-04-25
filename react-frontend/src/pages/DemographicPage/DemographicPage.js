@@ -35,8 +35,6 @@ const { Title,  Text } = Typography;
 
 const DemographicPage = () => {
 
-    const [consent, setConsent] = useState(false);
-
     const onFinish = (values) => {
         let url = `${Api}/userDemographic`;
         request({ url: url, method:"POST"})
@@ -44,7 +42,7 @@ const DemographicPage = () => {
         .then(
           res => {
             console.log('Success:', values);
-
+            window.location.assign("/#/trailPage")
           }
         );
     };
