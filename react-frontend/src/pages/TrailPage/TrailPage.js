@@ -5,7 +5,7 @@ import PopupModal from "./components/PopupModal";
 import { request } from "../../utils/request";
 const fs = require("fs");
 
-const baseImgUrl = "./images/";
+const baseImgUrl = "/static/img/";
 
 const TrailPage = () => {
   //   const dispatch = useDispatch();
