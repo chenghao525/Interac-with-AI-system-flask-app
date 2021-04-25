@@ -13,7 +13,7 @@ import DemographicPage from "../../pages/DemographicPage/DemographicPage";
 const Router = () => {
   return (
     <Switch>
-        <Route path="/" component={StarterPage} />
+        <Route exact path="/" component={StarterPage} />
         <Route exact path="/trailPage" component={TrailPage} />
         <Route exact path="/readyPage" component={ReadyPage} />
         <Route exact path="/demographic" component={DemographicPage} />

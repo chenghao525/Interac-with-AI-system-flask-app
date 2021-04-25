@@ -37,7 +37,8 @@ db = SQLAlchemy(app)
 # 2. q_order: String (0 or 1) - question order: E7 E3 E2 ... E4 H7 H1 H4 ... H6
 # 3. timing: Integer (0 or 1) - timing constraint for changing answer: short(0) or long(1)
 class User(db.Model):
-    consent = db.Column(db.Integer, nullable=False, primary_key=True)
+    user_id = db.Column(db.Integer, nullable=False, primary_key=True)
+    consent = db.Column(db.Integer, nullable=False)
     q_order = db.Column(db.String(120), nullable=False)
     timing = db.Column(db.Integer, nullable=False)
 
@@ -58,7 +59,7 @@ class Guess(db.Model):
     q_id = db.Column(db.String(20), nullable=False)
     init_guess = db.Column(db.Integer, nullable=False)
     final_guess = db.Column(db.Integer, nullable=False)
-    resp_time = db.Column(db.Integer, nullable=False)
+    resp_time = db.Column(db.Float, nullable=False)
 
     def __init__(self, user_id, q_id, init_guess, final_guess, resp_time):
         self.user_id = user_id
@@ -122,13 +123,16 @@ def start():
     else:
         timing = 15
 
-    db.session.add(User(consent, q_order, timing))
+    newUser = User(consent, q_order, timing)
+    db.session.add(newUser)
     db.session.commit()
+
+    user_id = newUser.user_id
 
     msg = "Record successfully added"
     print(msg)
 
-    user_id = db.engine.execute("SELECT last_insert_rowid()").fetchone()[0]
+    # user_id = db.engine.execute("SELECT ").fetchone()[0]
 
     response_body = {'user_id': user_id}
 
@@ -140,8 +144,9 @@ def start():
 def getUserData():
     user_id = request.args.get('userID')
 
-    q_order = db.engine.execute('SELECT q_order FROM User WHERE rowid = %s', [int(user_id)]).fetchone()[0]
-    timing = db.engine.execute('SELECT timing FROM User WHERE rowid = %s', [int(user_id)]).fetchone()[0]
+    # q_order = db.engine.execute('SELECT User.q_order FROM User WHERE user_id = %s', [int(user_id)]).fetchone()[0]
+    q_order = User.query.filter_by(user_id = user_id).first().q_order
+    timing = User.query.filter_by(user_id = user_id).first().timing
 
     response_body = {'user_id': user_id, 'q_order': q_order, "timing": timing}
     return jsonify(response_body)
@@ -175,7 +180,8 @@ def inputAnswer():
 def getImageInfo():
     q_id = request.args.get('q_id')
 
-    truth = db.engine.execute('SELECT truth FROM Image WHERE q_id =(?) ;', [q_id]).fetchone()[0]
+    # truth = db.engine.execute('SELECT truth FROM Image WHERE q_id =(?) ;', [q_id]).fetchone()[0]
+    truth = Image.query.filter_by(q_id = q_id).first().truth
 
     rand_num = round(random.sample(range(10, 21), 1)[0] * truth / 100)
     rand_var = random.sample(range(0, 2), 1)[0]
@@ -191,22 +197,23 @@ def getImageInfo():
 
 
 if __name__ == "__main__":
+    db.drop_all()
     db.create_all()
 
     # Add Ground Truth Info
-    # db.session.add(Image('E1', 29, 'PETEc2013a_000040'))
-    # db.session.add(Image('E2', 29, 'PETEc2013a_000884'))
-    # db.session.add(Image('E3', 35, 'NEKOc2013c_000145'))
-    # db.session.add(Image('E4', 30, 'PETEc2014a_000759'))
-    # db.session.add(Image('E5', 34, 'PETEc2013a_000262'))
-    #
-    # db.session.add(Image('H1', 60, 'MAIVb2012a_000016'))
-    # db.session.add(Image('H2', 39, 'MAIVb2012a_000362'))
-    # db.session.add(Image('H3', 49, 'MAIVb2013a_000035'))
-    # db.session.add(Image('H4', 46, 'MAIVb2012a_000595'))
-    # db.session.add(Image('H5', 47, 'MAIVb2013a_000120'))
+    db.session.add(Image('E1', 29, 'PETEc2013a_000040'))
+    db.session.add(Image('E2', 29, 'PETEc2013a_000884'))
+    db.session.add(Image('E3', 35, 'NEKOc2013c_000145'))
+    db.session.add(Image('E4', 30, 'PETEc2014a_000759'))
+    db.session.add(Image('E5', 34, 'PETEc2013a_000262'))
+    
+    db.session.add(Image('H1', 60, 'MAIVb2012a_000016'))
+    db.session.add(Image('H2', 39, 'MAIVb2012a_000362'))
+    db.session.add(Image('H3', 49, 'MAIVb2013a_000035'))
+    db.session.add(Image('H4', 46, 'MAIVb2012a_000595'))
+    db.session.add(Image('H5', 47, 'MAIVb2013a_000120'))
 
-    # db.session.commit()
+    db.session.commit()
 
     port = int(os.environ.get('PORT', 5000))
     app.run(host='127.0.0.1', port=port)
