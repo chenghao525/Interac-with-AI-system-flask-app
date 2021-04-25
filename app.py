@@ -10,7 +10,7 @@ import os
 import urllib.parse as urlparse
 from urllib.parse import urlencode
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='interact-with-AI-system-flask-app/react-frontend/build')
 
 #cors = CORS(app)
 
