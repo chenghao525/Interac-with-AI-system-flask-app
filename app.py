@@ -127,7 +127,6 @@ def start():
 
     response_body = {'user_id': user_id}
 
-    render_template('index.html')
     return jsonify(response_body)
 
 
@@ -140,7 +139,6 @@ def getUserData():
     timing = db.execute('SELECT timing FROM User WHERE rowid =(?) ;', [int(user_id)]).fetchone()[0]
 
     response_body = {'user_id': user_id, 'q_order': q_order, "timing": timing}
-    render_template('index.html')
     return jsonify(response_body)
 
 
@@ -164,7 +162,6 @@ def inputAnswer():
     response_body = {'user_id': user_id}
     print("user_id=" + str(user_id))
 
-    render_template('index.html')
     return jsonify(response_body)
 
 
@@ -185,7 +182,6 @@ def getImageInfo():
 
     response_body = {'q_id': q_id, 'ai': ai}
 
-    render_template('index.html')
     return jsonify(response_body)
 
 
