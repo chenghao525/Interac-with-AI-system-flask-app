@@ -8,7 +8,7 @@ import { Api } from '../../config/api';
 import { request } from "../../utils/request";
 const fs = require("fs");
 
-const baseImgUrl = "./images/";
+const baseImgUrl = "/static/images/";
 
 const MainPage = () => {
   //   const dispatch = useDispatch();
