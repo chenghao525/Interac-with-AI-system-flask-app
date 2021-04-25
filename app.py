@@ -12,7 +12,8 @@ from urllib.parse import urlencode
 
 app = Flask(__name__)
 
-#cors = CORS(app)
+cors = CORS(app)
+
 
 # Get Database_url from Heroku config and add sslmode to query
 # DATABASE_URL = os.environ['DATABASE_URL']
@@ -28,6 +29,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = urlparse.urlunparse(url_parts)
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
+
 
 # User - User Table
 # User ID == Row Number
@@ -82,9 +84,11 @@ class Image(db.Model):
 
 
 @app.route('/')
+@cross_origin()
 def index():
     """serves React App"""
     return render_template('index.html')
+
 
 @app.route('/start', methods=['POST'])
 @cross_origin()
@@ -124,7 +128,7 @@ def start():
     msg = "Record successfully added"
     print(msg)
 
-    user_id = db.execute("SELECT last_insert_rowid()").fetchone()[0]
+    user_id = db.engine.execute("SELECT last_insert_rowid()").fetchone()[0]
 
     response_body = {'user_id': user_id}
 
@@ -136,8 +140,8 @@ def start():
 def getUserData():
     user_id = request.args.get('userID')
 
-    q_order = db.execute('SELECT q_order FROM User WHERE rowid =(?) ;', [int(user_id)]).fetchone()[0]
-    timing = db.execute('SELECT timing FROM User WHERE rowid =(?) ;', [int(user_id)]).fetchone()[0]
+    q_order = db.engine.execute('SELECT q_order FROM User WHERE rowid =(?) ;', [int(user_id)]).fetchone()[0]
+    timing = db.engine.execute('SELECT timing FROM User WHERE rowid =(?) ;', [int(user_id)]).fetchone()[0]
 
     response_body = {'user_id': user_id, 'q_order': q_order, "timing": timing}
     return jsonify(response_body)
@@ -171,7 +175,7 @@ def inputAnswer():
 def getImageInfo():
     q_id = request.args.get('q_id')
 
-    truth = db.execute('SELECT truth FROM Image WHERE q_id =(?) ;', [q_id]).fetchone()[0]
+    truth = db.engine.execute('SELECT truth FROM Image WHERE q_id =(?) ;', [q_id]).fetchone()[0]
 
     rand_num = round(random.sample(range(10, 21), 1)[0] * truth / 100)
     rand_var = random.sample(range(0, 2), 1)[0]
