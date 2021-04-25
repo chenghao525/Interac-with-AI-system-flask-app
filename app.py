@@ -48,6 +48,27 @@ class User(db.Model):
         self.timing = timing
 
 
+# Demographic - User Table
+# User ID == Row Number
+# 1. age
+# 2. gender
+# 3. education
+# 4. rate
+class Demographic(db.Model):
+    user_id = db.Column(db.Integer, nullable=False, primary_key=True)
+    age = db.Column(db.Integer, nullable=False, primary_key=True)
+    gender = db.Column(db.String(120), nullable=False)
+    education = db.Column(db.Integer, nullable=False)
+    rate = db.Column(db.Integer, nullable=False)
+
+    def __init__(self, user_id, age, gender, education, rate):
+        self.user_id = user_id
+        self.age = age
+        self.gender = gender
+        self.education = education
+        self.rate = rate
+
+
 # Guess - Guess Table
 # 1. user_id: Integer - User ID
 # 2. q_id: String (E1 or H3) - Question ID
@@ -139,6 +160,35 @@ def start():
     return jsonify(response_body)
 
 
+@app.route('/userDemographic', methods=['POST'])
+@cross_origin()
+def demographic():
+    body_decoded = request.get_json()
+
+    # Demographic - User Table
+    # 1. User ID
+    # 2. Age
+    # 3. Gender
+    # 4. Education
+    # 5. Rate
+    user_id = body_decoded['user_id']
+    age = body_decoded['age']
+    gender = body_decoded['gender']
+    education = body_decoded['education']
+    rate = body_decoded['rate']
+
+    user_demographic = Demographic(user_id, age, gender, education, rate)
+    db.session.add(user_demographic)
+    db.session.commit()
+
+    msg = "Record successfully added"
+    print(msg)
+
+    response_body = {'user_id': user_id}
+
+    return jsonify(response_body)
+
+
 @app.route('/userInfo', methods=['GET'])
 @cross_origin()
 def getUserData():
@@ -181,7 +231,7 @@ def getImageInfo():
     q_id = request.args.get('q_id')
 
     # truth = db.engine.execute('SELECT truth FROM Image WHERE q_id =(?) ;', [q_id]).fetchone()[0]
-    truth = Image.query.filter_by(q_id = q_id).first().truth
+    truth = Image.query.filter_by(q_id=q_id).first().truth
 
     rand_num = round(random.sample(range(10, 21), 1)[0] * truth / 100)
     rand_var = random.sample(range(0, 2), 1)[0]
