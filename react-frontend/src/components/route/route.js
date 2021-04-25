@@ -10,6 +10,7 @@ import TrailPage from "../../pages/TrailPage/TrailPage"
 import DemographicPage from "../../pages/DemographicPage/DemographicPage";
 import EndingSurveyPage from "../../pages/EndingSurveyPage/EndingSurveyPage";
 import InstructionPage from "../../pages/InstructionPage/InstructionPage";
+import LastPage from "../../pages/LastPage/LastPage";
 
 
 const Router = () => {
@@ -24,6 +25,7 @@ const Router = () => {
         <Route exact path="/questionnaire" component={QuestionPage} />
         <Route exact path="/mainpage" component={MainPage} />
         <Route exact path="/404" component={PageNotFound} />
+        <Route exact path="/end" component={LastPage} />
 
     </Switch>
   )

@@ -37,7 +37,7 @@ const EndingSurveyPage = () => {
                     request({ url: url, method: "POST", data: values})
                         .then((res) => {
                             console.log(res);
-                            // window.location.assign("/#/trailPage")
+                            window.location.assign("/#/end")
                         });
             })
             .catch((errorInfo) => {});
