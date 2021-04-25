@@ -9,6 +9,7 @@ import ReadyPage from "../../pages/ReadyPage/ReadyPage";
 import TrailPage from "../../pages/TrailPage/TrailPage"
 import DemographicPage from "../../pages/DemographicPage/DemographicPage";
 import EndingSurveyPage from "../../pages/EndingSurveyPage/EndingSurveyPage";
+import InstructionPage from "../../pages/InstructionPage/InstructionPage";
 
 
 const Router = () => {
@@ -17,6 +18,7 @@ const Router = () => {
         <Route exact path="/" component={StarterPage} />
         <Route exact path="/trailPage" component={TrailPage} />
         <Route exact path="/readyPage" component={ReadyPage} />
+        <Route exact path="/instructions" component={InstructionPage} />
         <Route exact path="/demographic" component={DemographicPage} />
         <Route exact path="/survey" component={EndingSurveyPage} />
         <Route exact path="/questionnaire" component={QuestionPage} />
