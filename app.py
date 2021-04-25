@@ -122,7 +122,7 @@ def start():
     else:
         timing = 15
 
-    db.session.add(Image(consent, q_order, timing))
+    db.session.add(User(consent, q_order, timing))
     db.session.commit()
 
     msg = "Record successfully added"
