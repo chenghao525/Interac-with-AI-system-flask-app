@@ -34,15 +34,16 @@ const formItemLayout = {
 const DemographicPage = () => {
     const [form] = Form.useForm();
 
-    const handleFormSubmit = () => {
-        form.validateFields()
+    const handleFormSubmit = async () => {
+        await form.validateFields()
             .then((values) => {
                     console.log("finished survey", values)
-
-                    values["user_id"].append(localStorage.getItem("user-id"))
-                    let url = `${Api}/userDemographic`;
-                    request({data: values, url: url, method: "POST"})
-                        .then(window.location.assign("/#/trailPage"))
+                    let url = `${Api}/userDemographic?userID=` + localStorage.getItem("user-id");
+                    request({ url: url, method: "POST", data: values})
+                        .then((res) => {
+                            console.log(res);
+                            window.location.assign("/#/trailPage")
+                        });
             })
             .catch((errorInfo) => {});
     };

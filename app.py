@@ -171,7 +171,7 @@ def demographicData():
     # 3. Gender
     # 4. Education
     # 5. Rate
-    user_id = body_decoded['user_id']
+    user_id = request.args.get('userID')
     age = body_decoded['age']
     gender = body_decoded['gender']
     education = body_decoded['education']
