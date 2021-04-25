@@ -16,7 +16,7 @@ app = Flask(__name__)
 
 # Get Database_url from Heroku config and add sslmode to query
 # DATABASE_URL = os.environ['DATABASE_URL']
-DATABASE_URL = 'postgres://ststorukymhbaj:643f2dd332c333cf2d659de25a99ee0a697a2ac9d14933a362ceb061ad9ce9ad@ec2-34-225-167-77.compute-1.amazonaws.com:5432/d9pmgqc5g5r6go'
+DATABASE_URL = 'postgresql://ststorukymhbaj:643f2dd332c333cf2d659de25a99ee0a697a2ac9d14933a362ceb061ad9ce9ad@ec2-34-225-167-77.compute-1.amazonaws.com:5432/d9pmgqc5g5r6go'
 params = {'sslmode': 'require'}
 url_parts = list(urlparse.urlparse(DATABASE_URL))
 query = dict(urlparse.parse_qsl(url_parts[4]))
@@ -190,19 +190,19 @@ if __name__ == "__main__":
     db.create_all()
 
     # Add Ground Truth Info
-    db.session.add(Image('E1', 29, 'PETEc2013a_000040'))
-    db.session.add(Image('E2', 29, 'PETEc2013a_000884'))
-    db.session.add(Image('E3', 35, 'NEKOc2013c_000145'))
-    db.session.add(Image('E4', 30, 'PETEc2014a_000759'))
-    db.session.add(Image('E5', 34, 'PETEc2013a_000262'))
+    # db.session.add(Image('E1', 29, 'PETEc2013a_000040'))
+    # db.session.add(Image('E2', 29, 'PETEc2013a_000884'))
+    # db.session.add(Image('E3', 35, 'NEKOc2013c_000145'))
+    # db.session.add(Image('E4', 30, 'PETEc2014a_000759'))
+    # db.session.add(Image('E5', 34, 'PETEc2013a_000262'))
+    #
+    # db.session.add(Image('H1', 60, 'MAIVb2012a_000016'))
+    # db.session.add(Image('H2', 39, 'MAIVb2012a_000362'))
+    # db.session.add(Image('H3', 49, 'MAIVb2013a_000035'))
+    # db.session.add(Image('H4', 46, 'MAIVb2012a_000595'))
+    # db.session.add(Image('H5', 47, 'MAIVb2013a_000120'))
 
-    db.session.add(Image('H1', 60, 'MAIVb2012a_000016'))
-    db.session.add(Image('H2', 39, 'MAIVb2012a_000362'))
-    db.session.add(Image('H3', 49, 'MAIVb2013a_000035'))
-    db.session.add(Image('H4', 46, 'MAIVb2012a_000595'))
-    db.session.add(Image('H5', 47, 'MAIVb2013a_000120'))
-
-    db.session.commit()
+    # db.session.commit()
 
     port = int(os.environ.get('PORT', 5000))
     app.run(host='127.0.0.1', port=port)
