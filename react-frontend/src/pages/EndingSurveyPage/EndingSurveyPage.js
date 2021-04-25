@@ -54,11 +54,11 @@ const EndingSurveyPage = () => {
                     },
                     ]}>
                     <Radio.Group>
-                        <Radio value={1}>1 (strongly disagree)</Radio>
-                        <Radio value={2}>2 (disagree)</Radio>
-                        <Radio value={3}>3 (neither agree nor disagree) </Radio>
-                        <Radio value={4}>4 (agree) </Radio>
-                        <Radio value={5}>5 (strongly agree) </Radio>
+                        <Radio value="1">1 (strongly disagree)</Radio>
+                        <Radio value="2">2 (disagree)</Radio>
+                        <Radio value="3">3 (neither agree nor disagree) </Radio>
+                        <Radio value="4">4 (agree) </Radio>
+                        <Radio value="5">5 (strongly agree) </Radio>
                     </Radio.Group>
                 </Form.Item>
 
@@ -72,11 +72,11 @@ const EndingSurveyPage = () => {
                     ]}
                   >
                    <Radio.Group>
-                        <Radio value={1}>1 (strongly disagree)</Radio>
-                        <Radio value={2}>2 (disagree)</Radio>
-                        <Radio value={3}>3 (neither agree nor disagree) </Radio>
-                        <Radio value={4}>4 (agree) </Radio>
-                        <Radio value={5}>5 (strongly agree) </Radio>
+                        <Radio value="1">1 (strongly disagree)</Radio>
+                        <Radio value="2">2 (disagree)</Radio>
+                        <Radio value="3">3 (neither agree nor disagree) </Radio>
+                        <Radio value="4">4 (agree) </Radio>
+                        <Radio value="5">5 (strongly agree) </Radio>
                     </Radio.Group>
                 </Form.Item>
 
@@ -90,11 +90,11 @@ const EndingSurveyPage = () => {
                     ]}
                   >
                    <Radio.Group>
-                        <Radio value={1}>1 (strongly disagree)</Radio>
-                        <Radio value={2}>2 (disagree)</Radio>
-                        <Radio value={3}>3 (neither agree nor disagree) </Radio>
-                        <Radio value={4}>4 (agree) </Radio>
-                        <Radio value={5}>5 (strongly agree) </Radio>
+                        <Radio value="1">1 (strongly disagree)</Radio>
+                        <Radio value="2">2 (disagree)</Radio>
+                        <Radio value="3">3 (neither agree nor disagree) </Radio>
+                        <Radio value="4">4 (agree) </Radio>
+                        <Radio value="5">5 (strongly agree) </Radio>
                     </Radio.Group>
                 </Form.Item>
 
@@ -108,11 +108,11 @@ const EndingSurveyPage = () => {
                     ]}
                   >
                    <Radio.Group>
-                        <Radio value={1}>1 (strongly disagree)</Radio>
-                        <Radio value={2}>2 (disagree)</Radio>
-                        <Radio value={3}>3 (neither agree nor disagree) </Radio>
-                        <Radio value={4}>4 (agree) </Radio>
-                        <Radio value={5}>5 (strongly agree) </Radio>
+                        <Radio value="1">1 (strongly disagree)</Radio>
+                        <Radio value="2">2 (disagree)</Radio>
+                        <Radio value="3">3 (neither agree nor disagree) </Radio>
+                        <Radio value="4">4 (agree) </Radio>
+                        <Radio value="5">5 (strongly agree) </Radio>
                     </Radio.Group>
                 </Form.Item>
 
@@ -126,11 +126,11 @@ const EndingSurveyPage = () => {
                     ]}
                   >
                    <Radio.Group>
-                        <Radio value={1}>1 (strongly disagree)</Radio>
-                        <Radio value={2}>2 (disagree)</Radio>
-                        <Radio value={3}>3 (neither agree nor disagree) </Radio>
-                        <Radio value={4}>4 (agree) </Radio>
-                        <Radio value={5}>5 (strongly agree) </Radio>
+                        <Radio value="1">1 (strongly disagree)</Radio>
+                        <Radio value="2">2 (disagree)</Radio>
+                        <Radio value="3">3 (neither agree nor disagree) </Radio>
+                        <Radio value="4">4 (agree) </Radio>
+                        <Radio value="5">5 (strongly agree) </Radio>
                     </Radio.Group>
                 </Form.Item>
 
@@ -144,11 +144,11 @@ const EndingSurveyPage = () => {
                     ]}
                   >
                    <Radio.Group>
-                        <Radio value={1}>1 (strongly disagree)</Radio>
-                        <Radio value={2}>2 (disagree)</Radio>
-                        <Radio value={3}>3 (neither agree nor disagree) </Radio>
-                        <Radio value={4}>4 (agree) </Radio>
-                        <Radio value={5}>5 (strongly agree) </Radio>
+                        <Radio value="1">1 (strongly disagree)</Radio>
+                        <Radio value="2">2 (disagree)</Radio>
+                        <Radio value="3">3 (neither agree nor disagree) </Radio>
+                        <Radio value="4">4 (agree) </Radio>
+                        <Radio value="5">5 (strongly agree) </Radio>
                     </Radio.Group>
                 </Form.Item>
 
@@ -162,11 +162,11 @@ const EndingSurveyPage = () => {
                     ]}
                   >
                    <Radio.Group>
-                        <Radio value={1}>1 (strongly disagree)</Radio>
-                        <Radio value={2}>2 (disagree)</Radio>
-                        <Radio value={3}>3 (neither agree nor disagree) </Radio>
-                        <Radio value={4}>4 (agree) </Radio>
-                        <Radio value={5}>5 (strongly agree) </Radio>
+                        <Radio value="1">1 (strongly disagree)</Radio>
+                        <Radio value="2">2 (disagree)</Radio>
+                        <Radio value="3">3 (neither agree nor disagree) </Radio>
+                        <Radio value="4">4 (agree) </Radio>
+                        <Radio value="5">5 (strongly agree) </Radio>
                     </Radio.Group>
                 </Form.Item>
 
@@ -180,11 +180,11 @@ const EndingSurveyPage = () => {
                     ]}
                   >
                    <Radio.Group>
-                        <Radio value={1}>1 (strongly disagree)</Radio>
-                        <Radio value={2}>2 (disagree)</Radio>
-                        <Radio value={3}>3 (neither agree nor disagree) </Radio>
-                        <Radio value={4}>4 (agree) </Radio>
-                        <Radio value={5}>5 (strongly agree) </Radio>
+                        <Radio value="1">1 (strongly disagree)</Radio>
+                        <Radio value="2">2 (disagree)</Radio>
+                        <Radio value="3">3 (neither agree nor disagree) </Radio>
+                        <Radio value="4">4 (agree) </Radio>
+                        <Radio value="5">5 (strongly agree) </Radio>
                     </Radio.Group>
                 </Form.Item>
 
@@ -199,10 +199,10 @@ const EndingSurveyPage = () => {
                     ]}
                   >
                    <Radio.Group>
-                        <Radio value={1}> Myself </Radio>
-                        <Radio value={2}> The AI Agent </Radio>
-                        <Radio value={3}> Both  </Radio>
-                        <Radio value={4}> No One </Radio>
+                        <Radio value="1"> Myself </Radio>
+                        <Radio value="2"> The AI Agent </Radio>
+                        <Radio value="3"> Both  </Radio>
+                        <Radio value="4"> No One </Radio>
                     </Radio.Group>
                 </Form.Item>
 
