@@ -297,7 +297,9 @@ def userSurveyData():
     q8 = body_decoded['q8']
     q9 = body_decoded['q9']
     q10 = str(body_decoded['q10'])
-    q11 = body_decoded['q11']
+
+    if len(body_decoded) == 11:
+        q11 = body_decoded['q11']
 
     user_survey = Survey(user_id, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11)
     db.session.add(user_survey)
