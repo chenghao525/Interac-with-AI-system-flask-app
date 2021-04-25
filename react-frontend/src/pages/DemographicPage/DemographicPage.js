@@ -47,12 +47,8 @@ const DemographicPage = () => {
         );
     };
 
-    const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
-    };
-
     return (
-        <Form {...formItemLayout} layout='vertical' onFinish={onFinish} onFinishFailed={onFinishFailed}>
+        <Form {...formItemLayout} layout='vertical' onSubmit={onFinish}>
             <Form.Item
                 label="Age"
                 rules={[{
@@ -143,7 +139,7 @@ const DemographicPage = () => {
             </Form.Item>
 
             <Form.Item>
-                <Button type="primary" htmlType="submit">Submit</Button>
+                <Button type="submit" htmlType="submit">Submit</Button>
             </Form.Item>
         </Form>
     );
