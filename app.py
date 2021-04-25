@@ -327,7 +327,7 @@ if __name__ == "__main__":
     # db.session.add(Image('H3', 49, 'MAIVb2013a_000035'))
     # db.session.add(Image('H4', 46, 'MAIVb2012a_000595'))
     # db.session.add(Image('H5', 47, 'MAIVb2013a_000120'))
-    #
+
     # db.session.commit()
 
     port = int(os.environ.get('PORT', 5000))

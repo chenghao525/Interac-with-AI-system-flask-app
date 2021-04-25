@@ -1,33 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import "./index.css";
 
 import { request } from '../../utils/request.js';
-import { Button, Form, Input, Select, Radio, Checkbox} from "antd";
+import { Button, Form, Input, Radio, Checkbox} from "antd";
 import {Api} from "../../config/api";
-
-const layout = {
-  labelCol: {
-    span: 22,
-  },
-  wrapperCol: {
-    span: 22,
-  },
-};
-
-const tailLayout = {
-  wrapperCol: {
-    offset: 8,
-    span: 22,
-  },
-};
 
 const formItemLayout = {
     labelCol: {
         span: 22,
+        offset:1,
     },
     wrapperCol: {
         span: 22,
+        offset:1,
     },
 };
 
@@ -47,7 +33,7 @@ const EndingSurveyPage = () => {
     const handleFormSubmit = async () => {
         await form.validateFields()
             .then((values) => {
-                    let url = `${Api}/userSurvey?userID=` + localStorage.getItem("user-id");
+                    let url = `${Api}/userSurveyData?userID=` + localStorage.getItem("user-id");
                     request({ url: url, method: "POST", data: values})
                         .then((res) => {
                             console.log(res);
