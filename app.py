@@ -140,8 +140,8 @@ def start():
 def getUserData():
     user_id = request.args.get('userID')
 
-    q_order = db.engine.execute('SELECT q_order FROM User WHERE rowid =(?) ;', [int(user_id)]).fetchone()[0]
-    timing = db.engine.execute('SELECT timing FROM User WHERE rowid =(?) ;', [int(user_id)]).fetchone()[0]
+    q_order = db.engine.execute('SELECT q_order FROM User WHERE rowid = %s', [int(user_id)]).fetchone()[0]
+    timing = db.engine.execute('SELECT timing FROM User WHERE rowid = %s', [int(user_id)]).fetchone()[0]
 
     response_body = {'user_id': user_id, 'q_order': q_order, "timing": timing}
     return jsonify(response_body)
