@@ -162,7 +162,7 @@ def start():
 
 @app.route('/userDemographic', methods=['POST'])
 @cross_origin()
-def demographic():
+def demographicData():
     body_decoded = request.get_json()
 
     # Demographic - User Table
@@ -247,23 +247,23 @@ def getImageInfo():
 
 
 if __name__ == "__main__":
-    db.drop_all()
+    #db.drop_all()
     db.create_all()
 
     # Add Ground Truth Info
-    db.session.add(Image('E1', 29, 'PETEc2013a_000040'))
-    db.session.add(Image('E2', 29, 'PETEc2013a_000884'))
-    db.session.add(Image('E3', 35, 'NEKOc2013c_000145'))
-    db.session.add(Image('E4', 30, 'PETEc2014a_000759'))
-    db.session.add(Image('E5', 34, 'PETEc2013a_000262'))
-    
-    db.session.add(Image('H1', 60, 'MAIVb2012a_000016'))
-    db.session.add(Image('H2', 39, 'MAIVb2012a_000362'))
-    db.session.add(Image('H3', 49, 'MAIVb2013a_000035'))
-    db.session.add(Image('H4', 46, 'MAIVb2012a_000595'))
-    db.session.add(Image('H5', 47, 'MAIVb2013a_000120'))
-
-    db.session.commit()
+    # db.session.add(Image('E1', 29, 'PETEc2013a_000040'))
+    # db.session.add(Image('E2', 29, 'PETEc2013a_000884'))
+    # db.session.add(Image('E3', 35, 'NEKOc2013c_000145'))
+    # db.session.add(Image('E4', 30, 'PETEc2014a_000759'))
+    # db.session.add(Image('E5', 34, 'PETEc2013a_000262'))
+    #
+    # db.session.add(Image('H1', 60, 'MAIVb2012a_000016'))
+    # db.session.add(Image('H2', 39, 'MAIVb2012a_000362'))
+    # db.session.add(Image('H3', 49, 'MAIVb2013a_000035'))
+    # db.session.add(Image('H4', 46, 'MAIVb2012a_000595'))
+    # db.session.add(Image('H5', 47, 'MAIVb2013a_000120'))
+    #
+    # db.session.commit()
 
     port = int(os.environ.get('PORT', 5000))
     app.run(host='127.0.0.1', port=port)
