@@ -64,7 +64,7 @@ const MainPage = () => {
     let imgList = [];
 
     for(let str of strList){
-      str += ".jpg";
+      str += ".jpeg";
       imgList.push(str);
     }
     setImgName(imgList[0]);

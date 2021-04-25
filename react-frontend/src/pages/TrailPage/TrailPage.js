@@ -54,7 +54,7 @@ const TrailPage = () => {
               {deleteImg ? (
                 <img src={baseImgUrl + "blank.jpeg"}></img>
               ) : (
-                <img src={baseImgUrl + "trail.jpg"}></img>
+                <img src={baseImgUrl + "trail.jpeg"}></img>
               )}
             </div>
           </div>
