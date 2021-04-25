@@ -36,6 +36,8 @@ const { Title,  Text } = Typography;
 const DemographicPage = () => {
 
     const onFinish = (values) => {
+        console.log("finished survey", values)
+        values["user_id"].append(localStorage.getItem("user-id"))
         let url = `${Api}/userDemographic`;
         request({data:values, url: url, method:"POST"})
         .then(response => response.json())
@@ -50,6 +52,7 @@ const DemographicPage = () => {
     return (
         <Form {...formItemLayout} layout='vertical' onSubmit={onFinish}>
             <Form.Item
+                name="age"
                 label="Age"
                 rules={[{
                     required: true,
@@ -107,6 +110,7 @@ const DemographicPage = () => {
             </Form.Item>
 
             <Form.Item
+                name = "education"
                 label="Education Level"
                 rules={[{
                     required: true,
@@ -123,6 +127,7 @@ const DemographicPage = () => {
             </Form.Item>
 
             <Form.Item
+                name ="rate"
                 label="On a scale from 1 (not familiar at all) to 5 (have a complete understanding) please rate your level of familiarity with the term Artificial Intelligence:"
                 rules={[{
                     required: true,
