@@ -11,7 +11,7 @@ const LastPage = () => {
 
     return (
         <div className="page-container">
-          <Title level={3}>Thank you for Completing the Study </Title>
+          <Title level={3}>Thank you for Completing the Study!</Title>
         </div>
     );
 };
