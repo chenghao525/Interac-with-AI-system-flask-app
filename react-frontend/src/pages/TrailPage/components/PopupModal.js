@@ -135,7 +135,7 @@ const PopupModal = (props) => {
               <Col span={12}>
                 <div className="modal-col">
                   <div className="estimate-text">AI's suggestion:</div>
-                  <div className="text-box">25</div>
+                  <div className="text-box">21</div>
                 </div>
               </Col>
             </Row>

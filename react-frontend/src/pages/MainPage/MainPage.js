@@ -77,9 +77,9 @@ const MainPage = () => {
 
   useEffect(()=>{
     if(imgName !== undefined && imgName[0] === "E")
-      setFirstCountDown(Date.now() + 1000 * 5);
+      setFirstCountDown(Date.now() + 1000 * 7);
     else if(imgName !== undefined && imgName[0] === "H")
-    setFirstCountDown(Date.now() + 1000 * 10);
+    setFirstCountDown(Date.now() + 1000 * 14);
   },[imgName])
 
   return (

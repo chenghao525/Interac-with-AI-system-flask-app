@@ -170,9 +170,9 @@ def start():
 
     timing_level = random.choice([0, 1])
     if timing_level == 0:
-        timing = 10
+        timing = 6
     else:
-        timing = 15
+        timing = 12
 
     newUser = User(consent, q_order, timing)
     db.session.add(newUser)
