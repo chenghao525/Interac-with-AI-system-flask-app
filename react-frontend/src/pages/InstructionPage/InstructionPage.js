@@ -12,7 +12,7 @@ const { Title,  Text } = Typography;
 const InstructionPage = () => {
 
     const next = () => {
-        window.location.assign("/#/trailPage")
+        window.location.assign("/#/trialPage")
     };
 
     return (
