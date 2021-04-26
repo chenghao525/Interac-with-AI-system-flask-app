@@ -48,13 +48,14 @@ const EndingSurveyPage = () => {
         <div style={{fontSize:"30px", marginBottom:"20px"}}>Final Survey</div>
             <Form {...formItemLayout} form ={form} layout='vertical'>
                 <Form.Item
+                style={{fontWeight:"bold"}}
                     name="q1"
                     label="I trusted the AI agent's suggestions"
                     rules={[{
                         required: true,
                     },
                     ]}>
-                    <Radio.Group>
+                    <Radio.Group style={{fontWeight:"normal"}}>
                         <Radio value="1">1 (strongly disagree)</Radio>
                         <Radio value="2">2 (disagree)</Radio>
                         <Radio value="3">3 (neither agree nor disagree) </Radio>
@@ -64,6 +65,7 @@ const EndingSurveyPage = () => {
                 </Form.Item>
 
                 <Form.Item
+                style={{fontWeight:"bold"}}
                     name="q2"
                     label="The AI agent's suggestions were useful"
                     rules={[
@@ -72,7 +74,7 @@ const EndingSurveyPage = () => {
                       },
                     ]}
                   >
-                   <Radio.Group>
+                   <Radio.Group style={{fontWeight:"normal"}}>
                         <Radio value="1">1 (strongly disagree)</Radio>
                         <Radio value="2">2 (disagree)</Radio>
                         <Radio value="3">3 (neither agree nor disagree) </Radio>
@@ -82,6 +84,7 @@ const EndingSurveyPage = () => {
                 </Form.Item>
 
                 <Form.Item
+                style={{fontWeight:"bold"}}
                     name="q3"
                     label="The AI agent made reasonable suggestions"
                     rules={[
@@ -90,7 +93,7 @@ const EndingSurveyPage = () => {
                       },
                     ]}
                   >
-                   <Radio.Group>
+                   <Radio.Group style={{fontWeight:"normal"}}>
                         <Radio value="1">1 (strongly disagree)</Radio>
                         <Radio value="2">2 (disagree)</Radio>
                         <Radio value="3">3 (neither agree nor disagree) </Radio>
@@ -100,6 +103,7 @@ const EndingSurveyPage = () => {
                 </Form.Item>
 
                 <Form.Item
+                style={{fontWeight:"bold"}}
                     name="q4"
                     label="I could tell when the AI agent made an unreasonable suggestion"
                     rules={[
@@ -108,7 +112,7 @@ const EndingSurveyPage = () => {
                       },
                     ]}
                   >
-                   <Radio.Group>
+                   <Radio.Group style={{fontWeight:"normal"}}>
                         <Radio value="1">1 (strongly disagree)</Radio>
                         <Radio value="2">2 (disagree)</Radio>
                         <Radio value="3">3 (neither agree nor disagree) </Radio>
@@ -118,6 +122,7 @@ const EndingSurveyPage = () => {
                 </Form.Item>
 
                 <Form.Item
+                style={{fontWeight:"bold"}}
                     name="q5"
                     label="I had sufficient time to contrast my initial guess with the AI agent’s suggestions"
                     rules={[
@@ -126,7 +131,7 @@ const EndingSurveyPage = () => {
                       },
                     ]}
                   >
-                   <Radio.Group>
+                   <Radio.Group style={{fontWeight:"normal"}}>
                         <Radio value="1">1 (strongly disagree)</Radio>
                         <Radio value="2">2 (disagree)</Radio>
                         <Radio value="3">3 (neither agree nor disagree) </Radio>
@@ -136,6 +141,7 @@ const EndingSurveyPage = () => {
                 </Form.Item>
 
                 <Form.Item
+                style={{fontWeight:"bold"}}
                     name="q6"
                     label="I would not be able to accurately complete the task without the AI agent"
                     rules={[
@@ -144,7 +150,7 @@ const EndingSurveyPage = () => {
                       },
                     ]}
                   >
-                   <Radio.Group>
+                   <Radio.Group style={{fontWeight:"normal"}}>
                         <Radio value="1">1 (strongly disagree)</Radio>
                         <Radio value="2">2 (disagree)</Radio>
                         <Radio value="3">3 (neither agree nor disagree) </Radio>
@@ -154,6 +160,7 @@ const EndingSurveyPage = () => {
                 </Form.Item>
 
                 <Form.Item
+                style={{fontWeight:"bold"}}
                     name="q7"
                     label="I contributed more to the task than the AI agent"
                     rules={[
@@ -162,7 +169,7 @@ const EndingSurveyPage = () => {
                       },
                     ]}
                   >
-                   <Radio.Group>
+                   <Radio.Group style={{fontWeight:"normal"}}>
                         <Radio value="1">1 (strongly disagree)</Radio>
                         <Radio value="2">2 (disagree)</Radio>
                         <Radio value="3">3 (neither agree nor disagree) </Radio>
@@ -172,6 +179,7 @@ const EndingSurveyPage = () => {
                 </Form.Item>
 
                 <Form.Item
+                    style={{fontWeight:"bold"}}
                     name="q8"
                     label="I would use this AI agent for future counting tasks"
                     rules={[
@@ -180,7 +188,7 @@ const EndingSurveyPage = () => {
                       },
                     ]}
                   >
-                   <Radio.Group>
+                   <Radio.Group style={{fontWeight:"normal"}}>
                         <Radio value="1">1 (strongly disagree)</Radio>
                         <Radio value="2">2 (disagree)</Radio>
                         <Radio value="3">3 (neither agree nor disagree) </Radio>
@@ -190,6 +198,7 @@ const EndingSurveyPage = () => {
                 </Form.Item>
 
                 <Form.Item
+                style={{fontWeight:"bold"}}
                     name="q9"
                     label="The average counting error for the 10 images that you evaluated was +\- 12 penguins.
                     Who do you blame for the mistakes?"
@@ -199,7 +208,7 @@ const EndingSurveyPage = () => {
                       },
                     ]}
                   >
-                   <Radio.Group>
+                   <Radio.Group style={{fontWeight:"normal"}}>
                         <Radio value="1"> Myself </Radio>
                         <Radio value="2"> The AI Agent </Radio>
                         <Radio value="3"> Both  </Radio>
@@ -208,6 +217,7 @@ const EndingSurveyPage = () => {
                 </Form.Item>
                 
                 <Form.Item
+                
                     name="q10"
                     label="What strategy did you use for estimating the number of penguins (may select multiple and write your own)?"
                     rules={[
@@ -215,15 +225,16 @@ const EndingSurveyPage = () => {
                         required: true,
                       },
                     ]}
-                    style={{margin:"0% 15%"}}
+                    style={{margin:"0% 15%",fontWeight:"bold"}}
                   >
-                    <Checkbox.Group options={options} defaultValue={['Other']}/>
+                    <Checkbox.Group style={{fontWeight:"normal"}} options={options} defaultValue={['Other']}/>
                 </Form.Item>
 
                 <Form.Item
+             
                     name="q11"
                     label="What other strategies did you use for estimating the number of penguins?"
-                    style={{marginTop:"20px"}}
+                    style={{marginTop:"20px",fontWeight:"bold"}}
                   >
                     <Input/>
                 </Form.Item>

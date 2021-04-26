@@ -76,7 +76,8 @@ class Demographic(db.Model):
 # 4. final_guess: Integer -  Final Guess
 # 5. resp_time: Integer - Response Time (in seconds)
 class Guess(db.Model):
-    user_id = db.Column(db.Integer, nullable=False, primary_key=True)
+    id = db.Column(db.Integer, nullable=False, primary_key=True)
+    user_id = db.Column(db.Integer, nullable=False)
     q_id = db.Column(db.String(20), nullable=False)
     init_guess = db.Column(db.Integer, nullable=False)
     final_guess = db.Column(db.Integer, nullable=False)
