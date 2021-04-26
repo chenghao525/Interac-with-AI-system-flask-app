@@ -20,6 +20,7 @@ const MainPage = () => {
   const [deadline, setDeadline] = useState(0);
   const [deleteImg, setDeleteImg] = useState(false);
   const [firstCountDown, setFirstCountDown] = useState(Date.now() + 1000 * 1000);
+  const [firstCountDownTime, setFirstCountDownTime] = useState(Date.now() + 1000 * 1000);
   const [modalCountDown, setModalCountDown] = useState(Date.now() + 1000 * 1000);
 
   const deadlineValue = Date.now() + 1000 * 2;
@@ -53,8 +54,10 @@ const MainPage = () => {
         let imageString = res['q_order']
         formatImageList(imageString);
         setModalCountDown(res['timing']);
-        if(imageString[0] === "E"){setFirstCountDown(Date.now() + 1000*5);}
-        else {setFirstCountDown(Date.now() + 1000*10);}
+        // if(imageString[0] === "E"){setFirstCountDown(Date.now() + 1000*5);}
+        // else {setFirstCountDown(Date.now() + 1000*10);}
+        if(imageString[0] === "E"){setFirstCountDownTime(5);}
+        else {setFirstCountDownTime(10);}
       }
     );
   };
@@ -71,15 +74,21 @@ const MainPage = () => {
     setImageList(imgList);
   }
 
+  const handleImageLoaded = () =>{
+    setFirstCountDown(Date.now() + 1000*firstCountDownTime)
+  }
+
   useEffect(() => {
     getUserData();
   }, []);
 
   useEffect(()=>{
     if(imgName !== undefined && imgName[0] === "E")
-      setFirstCountDown(Date.now() + 1000 * 7);
+      // setFirstCountDown(Date.now() + 1000 * 7);
+      setFirstCountDownTime(5);
     else if(imgName !== undefined && imgName[0] === "H")
-    setFirstCountDown(Date.now() + 1000 * 14);
+    // setFirstCountDown(Date.now() + 1000 * 14);
+      setFirstCountDownTime(10);
   },[imgName])
 
   return (
@@ -92,7 +101,7 @@ const MainPage = () => {
               {deleteImg ? (
                 <img src={baseImgUrl + "blank.jpeg"}></img>
               ) : (
-                <img src={baseImgUrl + imageList[imgIndex]}></img>
+                <img src={baseImgUrl + imageList[imgIndex]} onLoad={handleImageLoaded}></img>
               )}
             </div>
           </div>
