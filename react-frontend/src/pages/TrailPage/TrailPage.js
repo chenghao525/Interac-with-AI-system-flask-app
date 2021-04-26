@@ -14,17 +14,18 @@ const TrailPage = () => {
   const [imgName, setImgName] = useState("");
   const [imageList, setImageList] = useState([]);
   const [openModal, setOpenModal] = useState(false);
-  const [deadline, setDeadline] = useState(0);
+  const [deadline, setDeadline] = useState(Date.now() + 1000 * 10);
   const [deleteImg, setDeleteImg] = useState(false);
   const [firstCountDown, setFirstCountDown] = useState(Date.now() + 1000 * 1000);
   const [modalCountDown, setModalCountDown] = useState(Date.now() + 1000 * 1000);
 
-  const deadlineValue = Date.now() + 1000 * 10;
+  let deadlineValue = Date.now() + 1000 * 10;
   const { Countdown } = Statistic;
 
   const handleCountdownFinished = () => {
     setDeleteImg(true);
     setOpenModal(true);
+    setDeadline(Date.now());
   };
 
   const modalTimesUp = () => {
@@ -63,7 +64,7 @@ const TrailPage = () => {
           <div className="countdown-container">
             <Countdown
               title="Countdown"
-              value={deadlineValue}
+              value={deadline}
               onFinish={handleCountdownFinished}
               format="mm:ss"
             />

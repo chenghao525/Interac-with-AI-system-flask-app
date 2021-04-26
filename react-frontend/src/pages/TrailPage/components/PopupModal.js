@@ -41,7 +41,7 @@ const PopupModal = (props) => {
 
   const handleConfirm = () => {
     setFirstConfim(true);
-    setDeadline(Date.now() + 1000 * 15);
+    setDeadline(Date.now() + 1000 * 10);
     setNowTime(Date.now());
   };
 
