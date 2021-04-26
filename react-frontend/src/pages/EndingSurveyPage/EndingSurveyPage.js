@@ -44,7 +44,8 @@ const EndingSurveyPage = () => {
     };
 
     return (
-        <>
+        <div style={{margin:"4% 10%"}}>
+        <div style={{fontSize:"30px", marginBottom:"20px"}}>Final Survey</div>
             <Form {...formItemLayout} form ={form} layout='vertical'>
                 <Form.Item
                     name="q1"
@@ -204,7 +205,7 @@ const EndingSurveyPage = () => {
                         <Radio value="4"> No One </Radio>
                     </Radio.Group>
                 </Form.Item>
-
+                
                 <Form.Item
                     name="q10"
                     label="What strategy did you use for estimating the number of penguins (may select multiple and write your own)?"
@@ -213,6 +214,7 @@ const EndingSurveyPage = () => {
                         required: true,
                       },
                     ]}
+                    style={{margin:"0% 15%"}}
                   >
                     <Checkbox.Group options={options} defaultValue={['Other']}/>
                 </Form.Item>
@@ -220,17 +222,18 @@ const EndingSurveyPage = () => {
                 <Form.Item
                     name="q11"
                     label="What other strategies did you use for estimating the number of penguins?"
+                    style={{marginTop:"20px"}}
                   >
                     <Input/>
                 </Form.Item>
 
                 <Form.Item>
-                    <Button onClick={handleFormSubmit}>Submit</Button>
+                    <Button style={{marginBottom:"50px"}} onClick={handleFormSubmit}>Submit</Button>
                 </Form.Item>
 
             </Form>
 
-        </>
+        </div>
     );
 };
 
