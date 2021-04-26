@@ -190,8 +190,7 @@ const EndingSurveyPage = () => {
 
                 <Form.Item
                     name="q9"
-                    label="The average counting error for the 10 images that you evaluated was +\- 12 penguins.
-                    Who do you blame for the mistakes?"
+                    label="Your overall performance on the task was 75%. Who do you blame for the mistakes?"
                     rules={[
                       {
                         required: true,
