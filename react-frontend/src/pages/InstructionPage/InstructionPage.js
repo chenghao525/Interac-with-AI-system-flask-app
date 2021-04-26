@@ -24,7 +24,7 @@ const InstructionPage = () => {
             </Row>
 
             <Row>
-                <Text level={5}> The order of the instructions you have to follow is:
+                <Text level={5} style={{marginTop:"30px"}}> The order of the instructions you have to follow is:
                 </Text>
             </Row>
 
@@ -58,23 +58,25 @@ const InstructionPage = () => {
                 </Text>
             </Row>
 
-            <Row>
+            <Row justify="start">
                 <Text level={5}> Remember to consider penguins that are occluded, cut by the corners of the image, in different poses or appearances in your count estimation. See the following image for a reference:
                 </Text>
             </Row>
 
-            <Row>
+            <Row justify="center">
                 <div className="img-frame">
                   <img src={baseImgUrl + "example.jpeg"}></img>
                 </div>
             </Row>
 
-            <Row>
+            <Row justify="center">
+            <div style={{marginTop:"30px"}}>
                 <Text level={5}> Now, click next to do a test run for the task.
                 </Text>
+                </div>
             </Row>
 
-             <Row>
+             <Row justify="center">
                 <div>
                     <Button
                         type="primary"
