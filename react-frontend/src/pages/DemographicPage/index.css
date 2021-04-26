@@ -1,3 +1,17 @@
 .ant-btn {
   margin-right: 8px;
 }
+
+.form-container{
+  margin: 4% 10%;
+  align-content: center;
+}
+
+.ant-row.ant-form-item{
+  align-content: center;
+
+}
+
+.ant-col.ant-col-12.ant-form-item-label{
+  width: 100%;
+}

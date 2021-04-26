@@ -48,7 +48,8 @@ const DemographicPage = () => {
     };
 
     return (
-        <>
+        <div className="form-container">
+        <div style={{fontSize:"30px", marginBottom:"20px"}}>Demographic Questions</div>
             <Form {...formItemLayout} form ={form} layout='vertical'>
                 <Form.Item
                     name="age"
@@ -126,7 +127,7 @@ const DemographicPage = () => {
 
             </Form>
 
-        </>
+        </div>
     );
 };
 
