@@ -37,6 +37,7 @@ const PopupModal = (props) => {
       resp_time: responseTime,
       init_guess: firstEstimation,
       final_guess: passInUpdated,
+      ai_suggestion: AISuggestion,
     };
 
     request({ url: `${Api}/answer`, method: "POST", data: data }).then((res) => {
