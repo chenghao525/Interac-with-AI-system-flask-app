@@ -82,13 +82,15 @@ class Guess(db.Model):
     init_guess = db.Column(db.Integer, nullable=False)
     final_guess = db.Column(db.Integer, nullable=False)
     resp_time = db.Column(db.Float, nullable=False)
+    ai_suggestion = db.Column(db.Integer, nullable=False)
 
-    def __init__(self, user_id, q_id, init_guess, final_guess, resp_time):
+    def __init__(self, user_id, q_id, init_guess, final_guess, resp_time, ai_suggestion):
         self.user_id = user_id
         self.q_id = q_id
         self.init_guess = init_guess
         self.final_guess = final_guess
         self.resp_time = resp_time
+        self.ai_suggestion = ai_suggestion
 
 
 # Image Table
@@ -242,8 +244,9 @@ def inputAnswer():
     init_guess = body_decoded['init_guess']
     final_guess = body_decoded['final_guess']
     resp_time = body_decoded['resp_time']
+    ai_suggestion = body_decoded['ai_suggestion']
 
-    db.session.add(Guess(user_id, q_id, init_guess, final_guess, resp_time))
+    db.session.add(Guess(user_id, q_id, init_guess, final_guess, resp_time, ai_suggestion))
     db.session.commit()
 
     msg = "Record successfully added"
