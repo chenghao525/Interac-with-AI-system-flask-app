@@ -29,7 +29,7 @@ const PopupModal = (props) => {
 
   const storeData = (passInUpdated) => {
     let responseTime = 0;
-    if(userInputTime === 0) responseTime = props.modalCountDown;
+    if(passInUpdated === firstEstimation) responseTime = props.modalCountDown;
     else responseTime = userInputTime
     let data = {
       user_id: localStorage.getItem("user-id"),
@@ -53,19 +53,6 @@ const PopupModal = (props) => {
         console.log("aiSugg", aiSugg)
         setAISuggestion(aiSugg);
   })};
-
-  // const getAISuggestion = () => {
-  //   let url = `${Api}imageInfo?q_id=` + localStorage.getItem("q_id");
-  //   console.log("question_id", localStorage.getItem("q_id"));
-  //   request({ url: url, method:"GET"})
-  //   .then(response => response.json())
-  //   .then(
-  //     res => {
-  //       let aiSugg = res['ai'];
-
-  //       setAISuggestion(aiSugg);
-  //     });
-  // };
 
   const clearModal = () => {
     setFirstEstimation(0);
