@@ -45,6 +45,7 @@ valid_users = unique(surveyData$User_id)
 demographics = demographics[is.element(demographics$User_id, valid_users),]
 conditions = conditions[is.element(conditions$User_id, valid_users),]
 responses = responses[is.element(responses$User_id, valid_users),]
+responses = subset(responses, responses$Init_guess>0)
 
 # compute performance, variation wrt initial guess, variation wrt AI
 # time to enter the final response
@@ -65,7 +66,7 @@ Final_guess = responses$Final_guess
 Truth = responses$Truth
 Ai_suggestion = responses$Ai_suggestion
 
-out=dplyr::summarise(group_by(responses, User_id, Q_id, Resp_time), Change=abs(Final_guess-Init_guess)/Init_guess, 
+out=dplyr::summarise(group_by(responses, User_id, Q_id, Resp_time), Change=abs(Final_guess-Init_guess)/(Init_guess), 
                                                                     Error=abs(Final_guess-Truth)/Truth,
                                                                     Bias=abs(Final_guess-Ai_suggestion)/Ai_suggestion)
 # all the objective metrics
@@ -79,7 +80,7 @@ out$Q_id[grepl('E', out$Q_id)]='easy'
 out$Q_id[grepl('H', out$Q_id)]='hard'
 
 # replace in Outcome=mean(x) where x can be Change, Error, Bias, Resp_time
-by_task=dplyr::summarise(group_by(out, User_id, Q_id), Outcome=mean(Bias))
+by_task=dplyr::summarise(group_by(out, User_id, Q_id), Outcome=mean(Resp_time))
 easy = subset(by_task, by_task$Q_id=="easy")
 hard = subset(by_task, by_task$Q_id=="hard")
 
@@ -98,6 +99,7 @@ df_responses = dplyr::inner_join(user_info, task_info, by="User_id")
 df_responses = gather(df_responses, key="Task", value="Outcome", c("easy", "hard"))
 df_responses$Task = factor(df_responses$Task)
 df_responses$Timing = factor(df_responses$Timing)
+df_responses$User_id = factor(df_responses$User_id)
 
 # Average change in final response wrt initial guess
 # Average counting error wrt groundtruth
@@ -111,6 +113,38 @@ ggplot(df_responses, aes(x=Timing, y=Outcome, fill=Task)) +
 df_responses %>% 
   group_by(Timing, Task) %>%
   get_summary_stats(Outcome, type="common")
+
+
+library(WRS2)
+library(rstatix)
+# mixed ANOVA
+# check assumptions
+# outliers
+df_responses %>% 
+  group_by(Timing, Task) %>%
+  identify_outliers(Outcome)
+# homogeneity of variances
+df_responses %>% levene_test(Outcome ~ Timing)
+
+# normality
+df_responses %>% 
+  group_by(Timing, Task) %>%
+  shapiro_test(Outcome)
+# reject H0 for short-hard
+
+# homogeneity of covariances
+box_m(df_responses[, "Outcome", drop=FALSE], df_responses$Timing)
+
+# sphericity
+
+# computation
+res.aov <- anova_test(
+  data=df_responses, dv=Outcome, wid=User_id,
+  between=Timing, within=Task
+)
+get_anova_table(res.aov)
+
+# try with non-parametric, the assumptions are not always fulfilled
 
 # SURVEY DATA 
 # add survey data: only one measurement per short and long
@@ -133,3 +167,8 @@ boxplot(Q9 ~ Timing, data=surveyResponses, main="Survey responses blame question
 surveyResponses %>% 
   group_by(Timing) %>%
   get_summary_stats(Q9, type="common")
+
+# analysis: non parametric
+wilcox.test(Q1~ Timing, data=df_survey, exact=FALSE)
+
+
