@@ -45,6 +45,7 @@ valid_users = unique(surveyData$User_id)
 demographics = demographics[is.element(demographics$User_id, valid_users),]
 conditions = conditions[is.element(conditions$User_id, valid_users),]
 responses = responses[is.element(responses$User_id, valid_users),]
+# remove users with an initial guess of 0 
 responses = subset(responses, responses$Init_guess>0)
 
 # compute performance, variation wrt initial guess, variation wrt AI
@@ -96,10 +97,16 @@ task_info <- data.frame('User_id'=easy$User_id,
 # merge user info with task info
 # add as new columns to df, then gather into task column
 df_responses = dplyr::inner_join(user_info, task_info, by="User_id")
+# get demographic summaries of valid users: Age, Gender, Rate, Education, Timing
+demo_count = dplyr::count(df_responses, Timing) 
+demo_count$n = demo_count$n/sum(demo_count$n)
+demo_count
+
 df_responses = gather(df_responses, key="Task", value="Outcome", c("easy", "hard"))
 df_responses$Task = factor(df_responses$Task)
 df_responses$Timing = factor(df_responses$Timing)
 df_responses$User_id = factor(df_responses$User_id)
+df_responses$Age = factor(df_responses$Age)
 
 # Average change in final response wrt initial guess
 # Average counting error wrt groundtruth
@@ -144,7 +151,50 @@ res.aov <- anova_test(
 )
 get_anova_table(res.aov)
 
+# Post-hoc analysis: main effect of variables
+one.way <- df_responses %>% 
+  group_by(Task) %>%
+  anova_test(dv=Outcome, wid=User_id, between=Timing) %>%
+  get_anova_table() %>%
+  adjust_pvalue(method="bonferroni")
+one.way
+
+# or between group levels: group_by(Task) Outcome~Timing
+pwc <- df_responses %>%
+  group_by(Timing) %>%
+  pairwise_t_test(Outcome~Task, p.adjust.method = "bonferroni")
+pwc
+
 # try with non-parametric, the assumptions are not always fulfilled
+
+
+# If there were no differences bw task levels nor timing, average data from easy and hard and ignore timing
+Outcome = df_responses$Outcome
+new=dplyr::summarise(group_by(df_responses, User_id, Age, Gender, Education, Rate), Ans=mean(Outcome))
+new$Gender = factor(new$Gender)
+new$Age = factor(new$Age)
+# make 2 groups of AI familiarity
+new$Rate[new$Rate>=4] = 'high'
+new$Rate[new$Rate<4] = 'low'
+new$Rate = factor(new$Rate) # can make 2 groups
+
+# plot and stats
+ggplot(new, aes(x=Rate, y=Ans)) + 
+  geom_boxplot()
+
+new %>% 
+  group_by(Gender) %>%
+  get_summary_stats(Ans, type="common")
+
+# independent T-test: 2 levels
+t.test(new$Ans~new$Rate)
+
+# one way ANOVA
+# check assumptions
+new = ungroup(new)
+res2.aov <- new %>% anova_test(Ans ~ Age)
+res2.aov 
+
 
 # SURVEY DATA 
 # add survey data: only one measurement per short and long
@@ -162,13 +212,18 @@ df_survey %>%
   group_by(Timing, Question) %>%
   get_summary_stats(value, type="common")
 
+# analysis: non parametric. 2 conditions: long and short timing
+# questions order: Q1-trust, Q2-useful, Q3-reasonable suggestions,
+# Q4-tell unreasonable, Q5-enough time, Q6-AI essential, 
+# Q7-user contribution, Q8-future use
+sub_question = subset(df_survey, df_survey$Question=="Q8")
+wilcox.test(value ~ Timing, data=sub_question, exact=FALSE)
+
 # Q9 in on blame
 boxplot(Q9 ~ Timing, data=surveyResponses, main="Survey responses blame question")
 surveyResponses %>% 
   group_by(Timing) %>%
   get_summary_stats(Q9, type="common")
-
-# analysis: non parametric
-wilcox.test(Q1~ Timing, data=df_survey, exact=FALSE)
+wilcox.test(Q9 ~ Timing, data=df_survey, exact=FALSE)
 
 
